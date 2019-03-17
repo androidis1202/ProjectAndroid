@@ -68,14 +68,14 @@ public class Sign_up extends AppCompatActivity {
                         txtError.setText("Inserted is unsuccessful. Please try again!");
                         return;
                     } else {
-                        final ProgressDialog progressDialog = new ProgressDialog(Sign_up.this, R.style.AppTheme);
+                        final ProgressDialog progressDialog = new ProgressDialog(Sign_up.this);
                         progressDialog.setIndeterminate(true);
                         progressDialog.setMessage("Loading...");
                         progressDialog.show();
                         new android.os.Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Intent intent = new Intent();
+                                Intent intent = new Intent(Sign_up.this, Login.class);
                                 intent.putExtra("userinformation", user);
                                 setResult(200, intent);
                                 finish();

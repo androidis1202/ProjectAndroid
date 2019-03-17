@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checkedAccount = myHelper.checkAccountLogin(txtEmail.getText().toString(), txtPassword.getText().toString());
                 if (checkedAccount == true) {
-                    final ProgressDialog progressDialog = new ProgressDialog(Login.this,R.style.AppTheme);
+                    final ProgressDialog progressDialog = new ProgressDialog(Login.this);
                     progressDialog.setIndeterminate(true);
                     progressDialog.setMessage("Authenticating...");
                     progressDialog.show();
