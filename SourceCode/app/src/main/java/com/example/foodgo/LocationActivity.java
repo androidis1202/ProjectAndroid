@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodgo.Entity.UserAddress;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -55,9 +56,11 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         btnUseCurrentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              getLocation();
+               UserAddress userAddress = new UserAddress();
+                userAddress = getLocation();
                 Intent intent = new Intent(LocationActivity.this, MainMenu.class);
-                intent.putExtra("userinformation", (Parcelable) getLocation());
+               intent.putExtra("userinformation", userAddress);
+                startActivity(intent);
                 finish();
             }
         });
@@ -72,8 +75,9 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
     /**
      * Phương thức này dùng để hiển thị trên UI
      * */
-    private List<Address> getLocation() {
+    private UserAddress getLocation() {
         List<Address> addresses = null;
+        UserAddress userAddress = new UserAddress();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Kiểm tra quyền hạn
             ActivityCompat.requestPermissions(this,
@@ -102,6 +106,12 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
 
+                    userAddress.setAddress(address);
+                    userAddress.setCity(city);
+                    userAddress.setCountry(country);
+                    userAddress.setKnownName(knownName);
+                    userAddress.setState(state);
+                    userAddress.setPostalCode(postalCode);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -114,7 +124,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                         "Bạn đã kích hoạt location trên thiết bị chưa?)");
             }
         }
-        return addresses;
+        return userAddress;
     }
 
 
