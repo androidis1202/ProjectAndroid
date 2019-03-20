@@ -1,8 +1,12 @@
 package com.example.foodgo;
 
+import android.content.Intent;
+import android.location.Address;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.foodgo.Entity.Category;
 
@@ -14,12 +18,16 @@ public class MainMenu extends AppCompatActivity {
     private ListView listView;
     private List<Category> categoryList;
     private ListViewAdapter myAdapter;
-
+private TextView view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        view = findViewById(R.id.textView2);
+        Intent intent = getIntent();
+        Address a = (Address) intent.getSerializableExtra("userinformation");
         listView = findViewById(R.id.list_view);
+        view.setText(a.getCountryName());
         categoryList = new ArrayList<>();
         myAdapter = new ListViewAdapter(this, R.layout.listview_layout, categoryList);
         categoryList.add(new Category(1, "Drink Menu", R.drawable.drink));

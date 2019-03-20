@@ -11,7 +11,7 @@ import com.example.foodgo.Entity.User;
 public class MyHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "User.db";
     public static final String USER_TABLE = "user_table";
-
+    public static final String USER_TABLE1 = "address_table";
 
 
     public MyHelper(Context context) {
@@ -20,8 +20,10 @@ public class MyHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + USER_TABLE + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, ADDRESS TEXT, PHONENUMBER TEXT, USERNAME TEXT, PASSWORD TEXT)");
+        db.execSQL("create table " + USER_TABLE + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT , LASTNAME TEXT, ADDRESS TEXT, PHONENUMBER TEXT, USERNAME TEXT, PASSWORD TEXT,FOREIGN KEY(FIRSTNAME)REFERENCES address_table(FIRSTNAME))");
+        db.execSQL("create table " + USER_TABLE1 + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT PRIMARY KEY, ADDRESS TEXT )");
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -91,6 +91,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
+                Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -107,7 +108,7 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        mCallbackManager.onActivityResult(120, 220, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             if (resultCode == 200) {
@@ -116,13 +117,13 @@ public class Login extends AppCompatActivity {
                 txtTitle.setText("Welcome " + String.valueOf(user.getFirstname()) + " " + String.valueOf(user.getLastname()));
             }
         }
-        if (requestCode == 120) {
-            if (resultCode == 220) {
-                Intent intent = new Intent(Login.this, LocationActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }
+//        if (requestCode == 120) {
+//            if (resultCode == 220) {
+//                Intent intent = new Intent(Login.this, LocationActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        }
 
     }
 }
