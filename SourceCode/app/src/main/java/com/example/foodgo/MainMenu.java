@@ -26,9 +26,15 @@ private TextView view;
         setContentView(R.layout.activity_main_menu);
         view = findViewById(R.id.textView2);
         Intent intent = getIntent();
-        UserAddress userAddress = (UserAddress) intent.getSerializableExtra("userinformation");
+        UserAddress userAddress = (UserAddress) intent.getSerializableExtra("userAddress");
         listView = findViewById(R.id.list_view);
         view.setText("You are in " + userAddress.getCity());
+
+
+        Intent intent2 = getIntent();
+        UserAddress userAddress2 = (UserAddress) intent2.getSerializableExtra("userAddressManual");
+        view.setText("You are in " + userAddress2.getCity());
+
         categoryList = new ArrayList<>();
         myAdapter = new ListViewAdapter(this, R.layout.listview_layout, categoryList);
         categoryList.add(new Category(1, "Drink Menu", R.drawable.drink));
@@ -37,4 +43,5 @@ private TextView view;
         categoryList.add(new Category(4, "Main Meal Menu",R.drawable.mainmenu));
         listView.setAdapter(myAdapter);
     }
+
 }

@@ -29,6 +29,18 @@ public class UserAddress implements Serializable {
         return address;
     }
 
+    @Override
+    public String toString() {
+        return "UserAddress{" +
+                "address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", knownName='" + knownName + '\'' +
+                '}';
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
