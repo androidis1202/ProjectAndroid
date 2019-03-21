@@ -68,6 +68,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void run() {
                             Intent intent = new Intent(Login.this, LocationActivity.class);
+                            intent.putExtra("emailcustomer", txtEmail.getText().toString());
                             startActivity(intent);
                             finish();
                             progressDialog.dismiss();
