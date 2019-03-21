@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodgo.DatabaseModel.MyHelper;
 import com.example.foodgo.Entity.Category;
 import com.example.foodgo.Entity.User;
 import com.example.foodgo.Entity.UserAddress;
@@ -25,9 +26,11 @@ public class ChooseLocationActivity extends AppCompatActivity {
     private TextView txtState;
     private TextView txtCountry;
     private TextView txtPostalCode;
-
+    private String email;
+    private MyHelper myHelper;
     private Button btnOk;
     private Button btnCancel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +43,10 @@ public class ChooseLocationActivity extends AppCompatActivity {
         txtPostalCode = findViewById(R.id.txtPostalCode);
         btnOk = findViewById(R.id.btnOKChooseLocation);
         btnCancel = findViewById(R.id.btnCancelLocation);
+        myHelper = new MyHelper(this);
 
-
-
+        Intent intent = this.getIntent();
+        email = intent.getStringExtra("emailAddressChoose");
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,11 +57,12 @@ public class ChooseLocationActivity extends AppCompatActivity {
                 userAddress.setCountry(txtCountry.getText().toString());
                 userAddress.setPostalCode(txtPostalCode.getText().toString());
                 userAddress.setKnownName("VietNam");
+                userAddress.setEmail(email);
+                myHelper.insertDataAddress(userAddress);
 
-
-              //  txtAddress.setText(userAddress.toString());
+                //  txtAddress.setText(userAddress.toString());
                 Intent intent = new Intent(ChooseLocationActivity.this, MainMenu.class);
-                intent.putExtra("userAddressManual",userAddress);
+                intent.putExtra("userAddressManual", userAddress);
                 startActivity(intent);
                 finish();
             }

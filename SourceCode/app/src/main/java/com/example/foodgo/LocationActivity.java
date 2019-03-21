@@ -75,6 +75,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationActivity.this, ChooseLocationActivity.class);
+                intent.putExtra("emailAddressChoose",email);
                 startActivity(intent);
                 finish();
             }
