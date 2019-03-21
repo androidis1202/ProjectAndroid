@@ -52,6 +52,8 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView imageView = myView.findViewById(R.id.imageView);
         txtName.setText(list.get(position).getName());
         imageView.setImageResource(list.get(position).getImage());
+
+        
         return myView;
     }
 }
