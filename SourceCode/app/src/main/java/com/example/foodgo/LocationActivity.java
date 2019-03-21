@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodgo.DatabaseModel.MyHelper;
 import com.example.foodgo.Entity.UserAddress;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -32,6 +33,8 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         GoogleApiClient.OnConnectionFailedListener {
 
     private Location location;
+    private String emailUser;
+    MyHelper database;
 
     // Đối tượng tương tác với Google API
     private GoogleApiClient gac;
@@ -45,7 +48,9 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        btnUseCurrentLocation  =findViewById(R.id.btnChooseLocation);
+        Intent intent = this.getIntent();
+        emailUser = intent.getStringExtra("email");
+        btnUseCurrentLocation = findViewById(R.id.btnChooseLocation);
         tvLocation = (TextView) findViewById(R.id.textView5);
         // Trước tiên chúng ta cần phải kiểm tra play services
         if (checkPlayServices()) {
@@ -56,10 +61,10 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         btnUseCurrentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               UserAddress userAddress = new UserAddress();
+                UserAddress userAddress = new UserAddress();
                 userAddress = getLocation();
                 Intent intent = new Intent(LocationActivity.this, MainMenu.class);
-               intent.putExtra("userinformation", userAddress);
+                intent.putExtra("userinformation", userAddress);
                 startActivity(intent);
                 finish();
             }
@@ -74,7 +79,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
 
     /**
      * Phương thức này dùng để hiển thị trên UI
-     * */
+     */
     private UserAddress getLocation() {
         List<Address> addresses = null;
         UserAddress userAddress = new UserAddress();
@@ -112,11 +117,12 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     userAddress.setKnownName(knownName);
                     userAddress.setState(state);
                     userAddress.setPostalCode(postalCode);
-
+                    userAddress.setEmail(emailUser);
+                    database = new MyHelper(this);
+                    database.insertDataAddress(userAddress);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
 
 
             } else {
@@ -130,7 +136,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
 
     /**
      * Tạo đối tượng google api client
-     * */
+     */
     protected synchronized void buildGoogleApiClient() {
         if (gac == null) {
             gac = new GoogleApiClient.Builder(this)
@@ -153,9 +159,10 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         }
         return true;
     }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-       // getLocation();
+        // getLocation();
     }
 
     @Override
