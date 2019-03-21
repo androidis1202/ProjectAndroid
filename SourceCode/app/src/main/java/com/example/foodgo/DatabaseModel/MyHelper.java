@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.foodgo.Entity.User;
+import com.example.foodgo.Entity.UserAddress;
 
 public class MyHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "User.db";
@@ -20,14 +21,15 @@ public class MyHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + USER_TABLE + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT , LASTNAME TEXT, ADDRESS TEXT, PHONENUMBER TEXT, USERNAME TEXT, PASSWORD TEXT,FOREIGN KEY(FIRSTNAME)REFERENCES address_table(FIRSTNAME))");
-//        db.execSQL("create table " + USER_TABLE1 + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT PRIMARY KEY, ADDRESS TEXT )");
+        db.execSQL("create table " + USER_TABLE + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT , LASTNAME TEXT, ADDRESS TEXT, PHONENUMBER TEXT, USERNAME TEXT, PASSWORD TEXT)");
+        db.execSQL("create table " + USER_TABLE1 + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, ADDRESS TEXT , CITY TEXT,STATE TEXT, COUNTRY TEXT,POSTALCODE TEXT, KNOWNNAME TEXT,EMAIL TEXT )");
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE1);
         onCreate(db);
     }
 
@@ -46,6 +48,20 @@ public class MyHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    public void insertDataAddress(UserAddress userAddress) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ADDRESS", userAddress.getAddress());
+        contentValues.put("CITY", userAddress.getCity());
+        contentValues.put("STATE", userAddress.getState());
+        contentValues.put("COUNTRY", userAddress.getCountry());
+        contentValues.put("POSTALCODE", userAddress.getPostalCode());
+        contentValues.put("KNOWNNAME", userAddress.getKnownName());
+        contentValues.put("EMAIL", userAddress.getEmail());
+        db.insert(USER_TABLE1, null, contentValues);
+        db.close();
     }
 
     public boolean checkAccountLogin(String username, String password) {
