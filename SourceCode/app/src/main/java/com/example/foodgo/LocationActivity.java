@@ -52,6 +52,8 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         emailUser = intent.getStringExtra("email");
         btnUseCurrentLocation = findViewById(R.id.btnChooseLocation);
         tvLocation = (TextView) findViewById(R.id.textView5);
+        btnUseCurrentLocation  =findViewById(R.id.btnChooseLocation);
+        tvLocation = (TextView) findViewById(R.id.txtChooseManually);
         // Trước tiên chúng ta cần phải kiểm tra play services
         if (checkPlayServices()) {
             // Building the GoogleApi client
@@ -62,9 +64,21 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onClick(View v) {
                 UserAddress userAddress = new UserAddress();
+               UserAddress userAddress = new UserAddress();
                 userAddress = getLocation();
+                if(userAddress!=null){
                 Intent intent = new Intent(LocationActivity.this, MainMenu.class);
-                intent.putExtra("userinformation", userAddress);
+               intent.putExtra("userAddress", userAddress);
+                startActivity(intent);
+                finish();
+            }
+            }
+        });
+
+        tvLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LocationActivity.this, ChooseLocationActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -79,7 +93,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
 
     /**
      * Phương thức này dùng để hiển thị trên UI
-     */
+     * */
     private UserAddress getLocation() {
         List<Address> addresses = null;
         UserAddress userAddress = new UserAddress();
@@ -120,9 +134,11 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     userAddress.setEmail(emailUser);
                     database = new MyHelper(this);
                     database.insertDataAddress(userAddress);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
 
 
             } else {
@@ -136,7 +152,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
 
     /**
      * Tạo đối tượng google api client
-     */
+     * */
     protected synchronized void buildGoogleApiClient() {
         if (gac == null) {
             gac = new GoogleApiClient.Builder(this)
@@ -159,10 +175,9 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         }
         return true;
     }
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        // getLocation();
+       // getLocation();
     }
 
     @Override
