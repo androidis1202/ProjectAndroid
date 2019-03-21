@@ -25,9 +25,9 @@ private TextView view;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         view = findViewById(R.id.textView2);
+        listView = findViewById(R.id.list_view);
         Intent intent = getIntent();
         UserAddress userAddress = (UserAddress) intent.getSerializableExtra("userAddress");
-        listView = findViewById(R.id.list_view);
         view.setText("You are in " + userAddress.getCity());
 
 
