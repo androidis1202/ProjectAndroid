@@ -14,8 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailFoodOrder"></activity>
-        <activity android:name=".ChooseLocationActivity" />
         <activity android:name=".ChooseLocationActivity"></activity>
         <activity android:name=".MainMenu" />
         <activity android:name=".LocationActivity" />

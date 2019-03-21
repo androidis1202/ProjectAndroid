@@ -38,23 +38,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.example.foodgo",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }
-
-
         viewPager = findViewById(R.id.slideViewPager);
         mDotLayout = findViewById(R.id.dotsLayout);
         btnStart = findViewById(R.id.btnStart);

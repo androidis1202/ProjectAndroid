@@ -10,19 +10,18 @@ public class UserAddress implements Serializable {
     private String country;
     private String postalCode;
     private String knownName;
-    private String email;
 
     public UserAddress() {
+
     }
 
-    public UserAddress(String address, String city, String state, String country, String postalCode, String knownName, String email) {
+    public UserAddress(String address, String city, String state, String country, String postalCode, String knownName) {
         this.address = address;
         this.city = city;
         this.state = state;
         this.country = country;
         this.postalCode = postalCode;
         this.knownName = knownName;
-        this.email = email;
     }
 
     public String getAddress() {
@@ -83,13 +82,5 @@ public class UserAddress implements Serializable {
 
     public void setKnownName(String knownName) {
         this.knownName = knownName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
