@@ -71,6 +71,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
             }
         });
 
+
         tvLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

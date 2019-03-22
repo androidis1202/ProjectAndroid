@@ -19,21 +19,31 @@ public class MainMenu extends AppCompatActivity {
     private ListView listView;
     private List<Category> categoryList;
     private ListViewAdapter myAdapter;
-private TextView view;
+    private TextView view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         view = findViewById(R.id.textView2);
         listView = findViewById(R.id.list_view);
+
         Intent intent = getIntent();
         UserAddress userAddress = (UserAddress) intent.getSerializableExtra("userAddress");
-        view.setText("You are in " + userAddress.getCity());
+
+
 
 
         Intent intent2 = getIntent();
         UserAddress userAddress2 = (UserAddress) intent2.getSerializableExtra("userAddressManual");
-        view.setText("You are in " + userAddress2.getCity());
+
+
+        if(userAddress == null)
+        {
+            view.setText("You are in " + userAddress2.getCity());
+        }else{
+            view.setText("You are in " + userAddress.getCity());
+        }
+
 
         categoryList = new ArrayList<>();
         myAdapter = new ListViewAdapter(this, R.layout.listview_layout, categoryList);
