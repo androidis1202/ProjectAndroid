@@ -34,7 +34,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         GoogleApiClient.OnConnectionFailedListener {
 
     private Location location;
-    private User userInfor;
+    public static User userInfor = new User();
     private MyHelper database;
     // Đối tượng tương tác với Google API
     private GoogleApiClient gac;

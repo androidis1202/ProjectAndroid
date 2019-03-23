@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
     private LoginButton btn_FB;
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
-    private User userinfor;
+    private static User userinfor = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,6 @@ public class Login extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
-                User user = new User();
                 final String[] email = new String[1];
                 final String[] id = new String[1];
                 GraphRequest.newMeRequest(
@@ -116,12 +115,12 @@ public class Login extends AppCompatActivity {
                             }
                         }).executeAsync();
 
-                user.setFirstname(id[0]);
-                user.setUsername(email[0]);
-                user.setPhonenumber("Facebook account");
-                myHelper.insertData(user);
+                userinfor.setFirstname(id[0]);
+                userinfor.setUsername(email[0]);
+                userinfor.setPhonenumber("Facebook account");
+                myHelper.insertData(userinfor);
                 Intent intent  = new Intent(Login.this, LocationActivity.class);
-                intent.putExtra("userinfor", user.getFirstname());
+                intent.putExtra("userinfor", userinfor);
                 startActivity(intent);
                 finish();
             }
