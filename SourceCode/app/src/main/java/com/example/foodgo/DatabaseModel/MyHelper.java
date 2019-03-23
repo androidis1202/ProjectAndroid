@@ -76,6 +76,20 @@ public class MyHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public User getDataUser(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(USER_TABLE, null, "USERNAME = ?", new String[]{username}, null, null, null);
+        User user = new User();
+        user.setId(cursor.getInt(cursor.getColumnIndex("ID")));
+        user.setFirstname(cursor.getString(cursor.getColumnIndex("FIRSTNAME")));
+        user.setLastname(cursor.getString(cursor.getColumnIndex("LASTNAME")));
+        user.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
+        user.setPhonenumber(cursor.getString(cursor.getColumnIndex("PHONENUMBER")));
+        user.setUsername(cursor.getString(cursor.getColumnIndex("USERNAME")));
+        user.setPassword(cursor.getString(cursor.getColumnIndex("PASSWORD")));
+        return user;
+    }
+
     public boolean checkExistAccount(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(USER_TABLE, new String[]{"ID"}, "USERNAME = ?", new String[]{username}, null, null, null);

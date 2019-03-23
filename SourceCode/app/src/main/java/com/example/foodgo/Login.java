@@ -65,6 +65,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean checkedAccount = myHelper.checkAccountLogin(txtEmail.getText().toString(), txtPassword.getText().toString());
+                userinfor = myHelper.getDataUser(txtEmail.getText().toString());
                 if (checkedAccount == true) {
                     final ProgressDialog progressDialog = new ProgressDialog(Login.this);
                     progressDialog.setIndeterminate(true);
@@ -96,6 +97,7 @@ public class Login extends AppCompatActivity {
         btn_FB.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                final String[] key = new String[1];
                 // App code
                 Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
                 GraphRequest.newMeRequest(
@@ -105,17 +107,16 @@ public class Login extends AppCompatActivity {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
-                                    String email = me.optString("email");
-                                    String id = me.optString("id");
-                                    userinfor.setUsername(email);
-                                    userinfor.setFirstname(id);
+                                    userinfor.setUsername(me.optString("email"));
+                                    userinfor.setFirstname(me.optString("id"));
+                                    userinfor.setPhonenumber("Facebook account");
+                                    myHelper.insertData(userinfor);
+                                    key[0] = me.optString("email");
                                     // send email and id to your web server
                                 }
                             }
                         }).executeAsync();
-
-                userinfor.setPhonenumber("Facebook account");
-                myHelper.insertData(userinfor);
+                userinfor = myHelper.getDataUser(key[0]);
                 Intent intent = new Intent(Login.this, LocationActivity.class);
                 intent.putExtra("userinfor", userinfor);
                 startActivity(intent);
