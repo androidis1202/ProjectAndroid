@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodgo.DatabaseModel.MyHelper;
+import com.example.foodgo.Entity.User;
 import com.example.foodgo.Entity.UserAddress;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -33,7 +34,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         GoogleApiClient.OnConnectionFailedListener {
 
     private Location location;
-    private String email;
+    private User userInfor;
     private MyHelper database;
     // Đối tượng tương tác với Google API
     private GoogleApiClient gac;
@@ -41,16 +42,18 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
     // Hiển thị vị trí
     private TextView tvLocation;
     private Button btnUseCurrentLocation;
+    private  TextView welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
+        welcome = findViewById(R.id.textView2);
         Intent intent = this.getIntent();
-        email = intent.getStringExtra("emailcustomer");
+        userInfor = (User) intent.getSerializableExtra("userinfor");
         btnUseCurrentLocation = findViewById(R.id.btnChooseLocation);
         tvLocation = (TextView) findViewById(R.id.txtChooseManually);
+        welcome.setText("Hi " + userInfor.getFirstname() + ", Nice to meet you");
         // Trước tiên chúng ta cần phải kiểm tra play services
         if (checkPlayServices()) {
             // Building the GoogleApi client
@@ -76,7 +79,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationActivity.this, ChooseLocationActivity.class);
-                intent.putExtra("emailAddressChoose",email);
+                intent.putExtra("emailAddressChoose",userInfor.getUsername());
                 startActivity(intent);
                 finish();
             }
@@ -129,7 +132,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     userAddress.setKnownName(knownName);
                     userAddress.setState(state);
                     userAddress.setPostalCode(postalCode);
-                    userAddress.setEmail(email);
+                    userAddress.setEmail(userInfor.getUsername());
                     database = new MyHelper(this);
                     database.insertDataAddress(userAddress);
 

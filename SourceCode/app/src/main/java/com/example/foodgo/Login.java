@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
     private LoginButton btn_FB;
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
+    private User userinfor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void run() {
                             Intent intent = new Intent(Login.this, LocationActivity.class);
-                            intent.putExtra("emailcustomer", txtEmail.getText().toString());
+                            intent.putExtra("userinfor", userinfor);
                             startActivity(intent);
                             finish();
                             progressDialog.dismiss();
@@ -98,7 +99,9 @@ public class Login extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
-
+                User user = new User();
+                final String[] email = new String[1];
+                final String[] id = new String[1];
                 GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -106,19 +109,19 @@ public class Login extends AppCompatActivity {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
-                                    String email = me.optString("email");
-                                    String id = me.optString("id");
+                                    email[0] = me.optString("email");
+                                     id[0] = me.optString("id");
                                     // send email and id to your web server
-                                    User user = new User();
-                                    user.setFirstname(id);
-                                    user.setUsername(email);
-                                    user.setPhonenumber("Facebook account");
-                                    myHelper.insertData(user);
                                 }
                             }
                         }).executeAsync();
 
+                user.setFirstname(id[0]);
+                user.setUsername(email[0]);
+                user.setPhonenumber("Facebook account");
+                myHelper.insertData(user);
                 Intent intent  = new Intent(Login.this, LocationActivity.class);
+                intent.putExtra("userinfor", user.getFirstname());
                 startActivity(intent);
                 finish();
             }
@@ -142,6 +145,7 @@ public class Login extends AppCompatActivity {
         if (requestCode == 100) {
             if (resultCode == 200) {
                 User user = (User) data.getSerializableExtra("userinformation");
+                userinfor = user;
                 txtEmail.setText(String.valueOf(user.getUsername()));
                 txtTitle.setText("Welcome " + String.valueOf(user.getFirstname()) + " " + String.valueOf(user.getLastname()));
             }
