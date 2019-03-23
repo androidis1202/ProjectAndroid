@@ -109,6 +109,11 @@ public class Login extends AppCompatActivity {
                                     String email = me.optString("email");
                                     String id = me.optString("id");
                                     // send email and id to your web server
+                                    User user = new User();
+                                    user.setFirstname(id);
+                                    user.setUsername(email);
+                                    user.setPhonenumber("Facebook account");
+                                    myHelper.insertData(user);
                                 }
                             }
                         }).executeAsync();
