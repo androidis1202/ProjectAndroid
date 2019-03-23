@@ -88,7 +88,6 @@ public class Login extends AppCompatActivity {
         });
 
 
-
         btn_FB = (LoginButton) findViewById(R.id.btn_fb);
         btn_FB.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
@@ -99,8 +98,6 @@ public class Login extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
-                final String[] email = new String[1];
-                final String[] id = new String[1];
                 GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -108,18 +105,18 @@ public class Login extends AppCompatActivity {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
-                                    email[0] = me.optString("email");
-                                     id[0] = me.optString("id");
+                                    String email = me.optString("email");
+                                    String id = me.optString("id");
+                                    userinfor.setUsername(email);
+                                    userinfor.setFirstname(id);
                                     // send email and id to your web server
                                 }
                             }
                         }).executeAsync();
 
-                userinfor.setFirstname(id[0]);
-                userinfor.setUsername(email[0]);
                 userinfor.setPhonenumber("Facebook account");
                 myHelper.insertData(userinfor);
-                Intent intent  = new Intent(Login.this, LocationActivity.class);
+                Intent intent = new Intent(Login.this, LocationActivity.class);
                 intent.putExtra("userinfor", userinfor);
                 startActivity(intent);
                 finish();
