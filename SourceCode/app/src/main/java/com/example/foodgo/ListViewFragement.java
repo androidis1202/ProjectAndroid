@@ -30,7 +30,7 @@ public class ListViewFragement extends Fragment {
         categoryList.add(new Category(1, "Drink Menu", R.drawable.drink));
         categoryList.add(new Category(2,"Fast Food Menu", R.drawable.fastfood));
         categoryList.add(new Category(3,"Soup Menu", R.drawable.soup));
-        categoryList.add(new Category(4, "Main Meal Menu",R.drawable.mainmenu));
+        categoryList.add(new Category(4, "Main Meal Menu", R.drawable.mainmenu));
         listView.setAdapter(myAdapter);
 
         return rootView;

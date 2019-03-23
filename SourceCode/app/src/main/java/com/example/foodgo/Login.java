@@ -2,6 +2,7 @@ package com.example.foodgo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Handler;
 import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
@@ -19,8 +20,12 @@ import com.example.foodgo.Entity.User;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -93,6 +98,24 @@ public class Login extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
+
+                GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject me, GraphResponse response) {
+                                if (response.getError() != null) {
+                                    // handle error
+                                } else {
+                                    String email = me.optString("email");
+                                    String id = me.optString("id");
+                                    // send email and id to your web server
+                                }
+                            }
+                        }).executeAsync();
+
+                Intent intent  = new Intent(Login.this, LocationActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override

@@ -1,69 +1,68 @@
 package com.example.foodgo;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.foodgo.Entity.Category;
 import com.example.foodgo.Entity.Drink;
 
 import java.util.List;
 
-public class RecycleViewDrink_Adapter extends RecyclerView.Adapter<RecycleViewDrink_Adapter.DrinkViewHolder> {
+public class Drink_Adapter  extends BaseAdapter {
 
+    private List<Drink> listData;
+    private LayoutInflater layoutInflater;
+    private Context context;
 
-        private List<Drink> DrinkList;
-        private Context mContext;
+    public Drink_Adapter(Context aContext,  List<Drink> listData) {
+        this.context = aContext;
+        this.listData = listData;
+        layoutInflater = LayoutInflater.from(aContext);
+    }
 
-        private LayoutInflater mLayoutInflater;
+    @Override
+    public int getCount() {
+        return listData.size();
+    }
 
-        public RecycleViewDrink_Adapter(Context context, List<Drink> datas) {
-                mContext = context;
-            DrinkList = datas;
-                mLayoutInflater = LayoutInflater.from(context);
-                }
+    @Override
+    public Object getItem(int position) {
+        return listData.get(position);
+    }
 
-        @Override
-        public DrinkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                //inflate view from row_item_song.xml
-                View itemView = mLayoutInflater.inflate(R.layout.drink_layout, parent, false);
-                return new DrinkViewHolder(itemView);
-                }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-
-        @Override
-        public void onBindViewHolder(DrinkViewHolder holder, int position) {
-                //get song in mSong via position
-                Drink drink = DrinkList.get(position);
-
-                //bind data to viewholder
-               // holder.tvCode.setText(Integer.toString(cate.getId()));
-                holder.tvPrice.setText("$"+Float.toString(drink.getPrice()));
-                holder.tvName.setText(drink.getName());
-                holder.imageView.setImageResource(drink.getImage());
-                }
-                @Override
-                public int getItemCount() {
-                return DrinkList.size();
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.drink_layout, null);
+            holder = new ViewHolder();
+            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView_flag);
+            holder.drinkName = (TextView) convertView.findViewById(R.id.txtName);
+            holder.price = (TextView) convertView.findViewById(R.id.textView_population);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        class DrinkViewHolder extends RecyclerView.ViewHolder {
-            private TextView tvCode;
-            private TextView tvName;
-            private TextView tvPrice;
-            private ImageView imageView;
+        Drink drink = this.listData.get(position);
+        holder.drinkName.setText(drink.getName());
+        holder.imageView.setImageResource(R.drawable.drink);
+        return convertView;
+    }
 
-            public DrinkViewHolder(View itemView) {
-                super(itemView);
-                //tvCode = (TextView) itemView.findViewById(R.id.tv_code);
-                tvName = (TextView) itemView.findViewById(R.id.tv_Name);
-                tvPrice = (TextView) itemView.findViewById(R.id.tv_Price);
-                imageView = (ImageView) itemView.findViewById(R.id.imageDrink);
-            }
-        }
-        }
+    static class ViewHolder {
+        ImageView imageView;
+        TextView drinkName;
+        TextView price;
+    }
 
+}
