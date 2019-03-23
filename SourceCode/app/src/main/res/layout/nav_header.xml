@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFD700"
+    android:gravity="bottom"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="176dp">
+
+    <ImageView
+        android:layout_width="94dp"
+        android:layout_height="74dp"
+        android:src="@drawable/food" />
+
+
+
+    <TextView
+        android:id="@+id/txtNameOfUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Ha lo Ha lo"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtEmailOfUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aaaaaaaa@gmail.com" />
+</LinearLayout>
