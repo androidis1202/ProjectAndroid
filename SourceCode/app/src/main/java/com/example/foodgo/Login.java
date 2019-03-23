@@ -65,7 +65,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean checkedAccount = myHelper.checkAccountLogin(txtEmail.getText().toString(), txtPassword.getText().toString());
-                userinfor = myHelper.getDataUser(txtEmail.getText().toString());
                 if (checkedAccount == true) {
                     final ProgressDialog progressDialog = new ProgressDialog(Login.this);
                     progressDialog.setIndeterminate(true);
@@ -75,6 +74,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void run() {
                             Intent intent = new Intent(Login.this, LocationActivity.class);
+                            userinfor = myHelper.getDataUser(txtEmail.getText().toString());
                             intent.putExtra("userinfor", userinfor);
                             startActivity(intent);
                             finish();

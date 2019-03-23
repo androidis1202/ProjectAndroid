@@ -78,15 +78,21 @@ public class MyHelper extends SQLiteOpenHelper {
 
     public User getDataUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(USER_TABLE, null, "USERNAME = ?", new String[]{username}, null, null, null);
+        String SELECT = "SELECT * FROM " + USER_TABLE + " WHERE USERNAME = '" + username +"'";
+        Cursor cursor = db.rawQuery(SELECT, null);
+
         User user = new User();
-        user.setId(cursor.getInt(cursor.getColumnIndex("ID")));
-        user.setFirstname(cursor.getString(cursor.getColumnIndex("FIRSTNAME")));
-        user.setLastname(cursor.getString(cursor.getColumnIndex("LASTNAME")));
-        user.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
-        user.setPhonenumber(cursor.getString(cursor.getColumnIndex("PHONENUMBER")));
-        user.setUsername(cursor.getString(cursor.getColumnIndex("USERNAME")));
-        user.setPassword(cursor.getString(cursor.getColumnIndex("PASSWORD")));
+        if (cursor.moveToLast())
+        {
+            user.setId(cursor.getInt(cursor.getColumnIndex("ID")));
+            user.setFirstname(cursor.getString(cursor.getColumnIndex("FIRSTNAME")));
+            user.setLastname(cursor.getString(cursor.getColumnIndex("LASTNAME")));
+            user.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
+            user.setPhonenumber(cursor.getString(cursor.getColumnIndex("PHONENUMBER")));
+            user.setUsername(cursor.getString(cursor.getColumnIndex("USERNAME")));
+            user.setPassword(cursor.getString(cursor.getColumnIndex("PASSWORD")));
+        }
+
         return user;
     }
 
