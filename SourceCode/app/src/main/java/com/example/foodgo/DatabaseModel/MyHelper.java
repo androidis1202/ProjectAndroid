@@ -92,7 +92,7 @@ public class MyHelper extends SQLiteOpenHelper {
             user.setUsername(cursor.getString(cursor.getColumnIndex("USERNAME")));
             user.setPassword(cursor.getString(cursor.getColumnIndex("PASSWORD")));
         }
-
+        db.close();
         return user;
     }
 

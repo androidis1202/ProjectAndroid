@@ -56,6 +56,7 @@ public class MainMenu extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
 
+
 //        Intent intent = getIntent();
 ////        UserAddress userAddress = (UserAddress) intent.getSerializableExtra("userAddress");
 ////        Intent intent2 = getIntent();
@@ -77,6 +78,7 @@ public class MainMenu extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ListViewFragement()).commit();
         }
+
 
 
 //        if(userAddress == null)

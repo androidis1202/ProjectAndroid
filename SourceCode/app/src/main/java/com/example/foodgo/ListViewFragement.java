@@ -23,6 +23,7 @@ public class ListViewFragement extends Fragment {
     private List<Category> categoryList;
     private ListViewAdapter myAdapter;
     private ListView listView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,14 +37,12 @@ public class ListViewFragement extends Fragment {
         categoryList.add(new Category(3,"Soup Menu", R.drawable.soup));
         categoryList.add(new Category(4, "Main Meal Menu", R.drawable.mainmenu));
         listView.setAdapter(myAdapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
                     Intent intent = new Intent(parent.getContext(), DrinkMenu.class);
                     startActivity(intent);
-
                 }
                 else if(position==1){
                     Intent intent = new Intent(parent.getContext(), Meal_Menu.class);
@@ -59,8 +58,10 @@ public class ListViewFragement extends Fragment {
                 }
             }
         });
+
         return rootView;
     }
+
 
 
 }

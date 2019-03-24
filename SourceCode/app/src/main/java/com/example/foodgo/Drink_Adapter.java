@@ -54,7 +54,8 @@ public class Drink_Adapter  extends BaseAdapter {
 
         Drink drink = this.listData.get(position);
         holder.drinkName.setText(drink.getName());
-        holder.imageView.setImageResource(R.drawable.drink);
+        holder.imageView.setImageResource(drink.getImage());
+        holder.price.setText("$"+Float.toString(drink.getPrice()));
         return convertView;
     }
 

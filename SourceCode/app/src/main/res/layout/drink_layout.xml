@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+
         android:id="@+id/imageView_drink"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp" />
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+
+        />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Country Name"
         android:id="@+id/txtName"
-        android:layout_alignTop="@+id/imageView_drink"
-        android:layout_toRightOf="@+id/imageView_drink"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Abczxy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/txtPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="91dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtName"
-        android:layout_alignStart="@+id/txtName"
-        android:layout_alignLeft="@+id/txtName"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="Population.."
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="Abcxyz"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/yellow"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-</RelativeLayout>
+</LinearLayout>
