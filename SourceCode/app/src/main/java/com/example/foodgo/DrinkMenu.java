@@ -21,24 +21,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DrinkMenu extends AppCompatActivity {
+public class DrinkMenu extends Fragment {
     private GridView gridView;
     private List<Drink> drinkList;
     private ListViewAdapter myAdapter;
     private TextView view;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drink_menu);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_drink_menu, container, false);
 
+        ListView listView = rootView.findViewById(R.id.list_view);
 
-        gridView = findViewById(R.id.gridViewDrink);
+        gridView = rootView.findViewById(R.id.gridViewDrink);
 
         List<Drink> image_details = getListData();
-        gridView.setAdapter(new Drink_Adapter(this, image_details));
+        gridView.setAdapter(new Drink_Adapter(getActivity(), image_details));
 
+        return  rootView;
     }
     private  List<Drink> getListData() {
+
         List<Drink> list = new ArrayList<Drink>();
         list.add(new Drink("Drink Menu",1,125f, R.drawable.drink));
         list.add(new Drink("Fast Food Menu",2,125f, R.drawable.fastfood));

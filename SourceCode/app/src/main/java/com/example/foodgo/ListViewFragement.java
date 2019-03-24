@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,11 @@ public class ListViewFragement extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    Intent intent = new Intent(parent.getContext(), DrinkMenu.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(parent.getContext(), DrinkMenu.class);
+//                    startActivity(intent);
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container, new DrinkMenu());
+                    fr.commit();
                 }
                 else if(position==1){
                     Intent intent = new Intent(parent.getContext(), Meal_Menu.class);
