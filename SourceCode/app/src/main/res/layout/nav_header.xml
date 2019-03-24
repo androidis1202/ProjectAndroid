@@ -15,20 +15,25 @@
         android:src="@drawable/food" />
 
 
-
     <TextView
         android:id="@+id/txtNameOfUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Ha lo Ha lo"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" >
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1">
 
     </TextView>
 
     <TextView
-        android:id="@+id/txtEmailOfUser"
+        android:id="@+id/txtFirstOfUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aaaaaaaa@gmail.com" />
+        android:paddingTop="8dp"
+        android:text="Ha lo Ha lo"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1">
+
+    </TextView>
+
+
 </LinearLayout>
