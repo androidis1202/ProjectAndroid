@@ -106,9 +106,10 @@ public class Login extends AppCompatActivity {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
-                                    userinfor.setUsername(me.optString("id"));
+                                    userinfor.setPassword(me.optString("id"));
                                     userinfor.setFirstname(me.optString("name"));
                                     userinfor.setPhonenumber("Facebook account");
+                                    userinfor.setUsername(me.optString("name") + "@gmail.com");
                                     myHelper.insertData(userinfor);
                                     userinfor = myHelper.getDataUser(me.optString("id"));
                                     Intent intent = new Intent(Login.this, LocationActivity.class);
