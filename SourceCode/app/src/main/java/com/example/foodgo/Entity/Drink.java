@@ -9,6 +9,23 @@ public class Drink implements Serializable {
     private Integer id;
     private float price;
     private int Image;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Drink(String name, Integer id, float price, int image, String description) {
+        this.name = name;
+        this.id = id;
+        this.price = price;
+        Image = image;
+        this.description = description;
+    }
 
     public int getImage() {
         return Image;
@@ -18,12 +35,6 @@ public class Drink implements Serializable {
         Image = image;
     }
 
-    public Drink(String name, Integer id, float price, int image) {
-        this.name = name;
-        this.id = id;
-        this.price = price;
-        Image = image;
-    }
 
     public Drink(){
     }
