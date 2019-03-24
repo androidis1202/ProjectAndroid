@@ -2,9 +2,13 @@ package com.example.foodgo;
 
 import android.content.Context;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.foodgo.Entity.Cart;
 
@@ -37,12 +41,28 @@ public class CartAdapter extends BaseAdapter {
         return position;
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
 
+        public TextView txtNameFood, txtPriceFood;
+        public ImageView imgCart;
+        public Button btnMinus, btnSum, btnPlus;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        ViewHolder viewHolder = null;
+        if(convertView == null)
+        {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            viewHolder.txtNameFood = convertView.findViewById(R.id.txtlistview_foodName);
+            viewHolder.txtPriceFood = convertView.findViewById(R.id.txtListViewFood_Price);
+            viewHolder.imgCart = convertView.findViewById(R.id.img_Food);
+            viewHolder.btnMinus = convertView.findViewById(R.id.btnMinus);
+            viewHolder.btnSum = convertView.findViewById(R.id.btnNumber);
+            viewHolder.btnPlus = convertView.findViewById(R.id.btnPlus);
+        }
+
+        return convertView;
     }
 }
