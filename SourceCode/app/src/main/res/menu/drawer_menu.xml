@@ -4,11 +4,11 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_message"
+        <item android:id="@+id/nav_order"
             android:icon="@drawable/ic_shopping_cart"
             android:title="Order"
             />
-        <item android:id="@+id/nav_chat"
+        <item android:id="@+id/nav_listFood"
             android:icon="@drawable/ic_list"
             android:title="List Foods"
             />
@@ -16,14 +16,22 @@
 
     <item android:title="Communicate">
         <menu>
-            <item android:id="@+id/nav_share"
+            <item android:id="@+id/nav_contact"
                 android:icon="@drawable/ic_share_black_24dp"
                 android:title="Contact"
                 />
-            <item android:id="@+id/nav_send"
+            <item android:id="@+id/nav_address"
                 android:icon="@drawable/ic_send_black_24dp"
                 android:title="Address"
                 />
+        </menu>
+    </item>
+    <item android:title="Other">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/com_facebook_tooltip_blue_xout"
+                android:title="Logout" />
         </menu>
     </item>
 </menu>

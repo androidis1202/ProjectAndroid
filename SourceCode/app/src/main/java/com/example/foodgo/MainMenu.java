@@ -2,12 +2,14 @@ package com.example.foodgo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -21,7 +23,7 @@ import com.example.foodgo.Entity.UserAddress;
 
 import java.util.List;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
     private List<Category> categoryList;
@@ -71,6 +73,7 @@ public class MainMenu extends AppCompatActivity {
 ////        categoryList.add(new Category(4, "Main Meal Menu",R.drawable.mainmenu));
 ////        listView.setAdapter(myAdapter);
 
+        navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -89,6 +92,32 @@ public class MainMenu extends AppCompatActivity {
 //        }
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.nav_order:{
+                break;
+            }
+            case R.id.nav_listFood:{
+                break;
+            }
+            case R.id.nav_contact:{
+                break;
+            }
+            case R.id.nav_address:{
+                break;
+            }
+            case R.id.nav_logout:{
+                Intent it = new Intent(MainMenu.this, Login.class);
+                startActivity(it);
+                break;
+            }
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
