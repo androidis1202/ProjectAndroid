@@ -1,7 +1,6 @@
 package com.example.foodgo;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +44,9 @@ public class Drink_Adapter  extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.drink_layout, null);
             holder = new ViewHolder();
-            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView_flag);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView_drink);
             holder.drinkName = (TextView) convertView.findViewById(R.id.txtName);
-            holder.price = (TextView) convertView.findViewById(R.id.textView_population);
+            holder.price = (TextView) convertView.findViewById(R.id.txtPrice);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkMenu extends AppCompatActivity {
-    private ListView listView;
+    private GridView gridView;
     private List<Drink> drinkList;
     private ListViewAdapter myAdapter;
     private TextView view;
@@ -24,11 +25,10 @@ public class DrinkMenu extends AppCompatActivity {
         setContentView(R.layout.activity_drink_menu);
 
 
-        listView = findViewById(R.id.listViewDrink);
+        gridView = findViewById(R.id.gridViewDrink);
 
         List<Drink> image_details = getListData();
-        final ListView listView = (ListView) findViewById(R.id.listViewDrink);
-        listView.setAdapter(new Drink_Adapter(this, image_details));
+        gridView.setAdapter(new Drink_Adapter(this, image_details));
 
     }
     private  List<Drink> getListData() {
