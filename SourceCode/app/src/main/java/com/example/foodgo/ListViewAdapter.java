@@ -55,44 +55,45 @@ public class ListViewAdapter extends BaseAdapter {
         txtName.setText(list.get(position).getName());
         imageView.setImageResource(list.get(position).getImage());
 
-        if (position == 0) {
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, DetailFoodOrder.class);
-                    context.startActivity(intent);
-                    context.finish();
-                }
-                });
-
-        } else if (position == 1) {
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, Drink.class);
-                    context.startActivity(intent);
-                    context.finish();
-                }
-            });
-        } else if (position == 2) {
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, Soup_Menu.class);
-                    context.startActivity(intent);
-                    context.finish();
-                }
-            });
-        } else if (position == 3) {
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, Fast_Food_Menu.class);
-                    context.startActivity(intent);
-                    context.finish();
-                }
-            });
-        }
+//        if (position == 0) {
+//
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, DetailFoodOrder.class);
+//                    context.startActivity(intent);
+//                    context.finish();
+//                }
+//                });
+//
+//        } else if (position == 1) {
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, Drink.class);
+//                    context.startActivity(intent);
+//                    context.finish();
+//                }
+//            });
+//        } else if (position == 2) {
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, Soup_Menu.class);
+//                    context.startActivity(intent);
+//                    context.finish();
+//                }
+//            });
+//        } else if (position == 3) {
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, Fast_Food_Menu.class);
+//                    context.startActivity(intent);
+//                    context.finish();
+//                }
+//            });
+//        }
         return myView;
     }
 }

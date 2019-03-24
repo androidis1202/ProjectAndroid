@@ -3,11 +3,11 @@ package com.example.foodgo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DetailFoodOrder extends AppCompatActivity {
+public class Meal_Menu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_food_order);
+        setContentView(R.layout.activity_meal__menu);
     }
 }

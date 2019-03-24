@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Fast_Food_Menu"></activity>
+        <activity android:name=".Meal_Menu"></activity>
+        <activity android:name=".Fast_Food_Menu" />
         <activity android:name=".Soup_Menu" />
         <activity android:name=".DrinkMenu" />
         <activity android:name=".ChooseLocationActivity" />
