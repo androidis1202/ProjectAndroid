@@ -17,10 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.foodgo.DatabaseModel.MyHelper;
+import com.example.foodgo.Entity.Cart;
 import com.example.foodgo.Entity.Category;
 import com.example.foodgo.Entity.User;
 import com.example.foodgo.Entity.UserAddress;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +34,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     private DrawerLayout drawer;
     private String email;
     private MyHelper myHelper;
+    public static ArrayList<Cart> cartArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +56,14 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         TextView firstname = headerView.findViewById(R.id.txtFirstOfUser);
         firstname.setText("Hello " + user.getFirstname());
 
+        if (cartArrayList != null) {
+
+        } else {
+            cartArrayList = new ArrayList<>();
+        }
 
         drawer = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
 
 
 //        Intent intent = getIntent();
@@ -83,7 +90,6 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         }
 
 
-
 //        if(userAddress == null)
 //        {
 //            view.setText("You are in " + userAddress2.getCity());
@@ -96,20 +102,20 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.nav_order:{
+        switch (menuItem.getItemId()) {
+            case R.id.nav_order: {
                 break;
             }
-            case R.id.nav_listFood:{
+            case R.id.nav_listFood: {
                 break;
             }
-            case R.id.nav_contact:{
+            case R.id.nav_contact: {
                 break;
             }
-            case R.id.nav_address:{
+            case R.id.nav_address: {
                 break;
             }
-            case R.id.nav_logout:{
+            case R.id.nav_logout: {
                 Intent it = new Intent(MainMenu.this, Login.class);
                 startActivity(it);
                 break;

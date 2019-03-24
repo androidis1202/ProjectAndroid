@@ -10,6 +10,14 @@ public class Cart {
     public Cart() {
     }
 
+    public Cart(int foodid, String foodname, long pricename, String foodimage, int foodnumber) {
+        this.foodid = foodid;
+        this.foodname = foodname;
+        this.pricename = pricename;
+        this.foodimage = foodimage;
+        this.foodnumber = foodnumber;
+    }
+
     public int getFoodid() {
         return foodid;
     }
