@@ -69,7 +69,6 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     Intent intent = new Intent(LocationActivity.this, MainMenu.class);
                     intent.putExtra("userAddress", userAddress);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -81,7 +80,6 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                 Intent intent = new Intent(LocationActivity.this, ChooseLocationActivity.class);
                 intent.putExtra("emailAddressChoose",userInfor.getUsername());
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -135,6 +133,8 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     userAddress.setEmail(userInfor.getUsername());
                     database = new MyHelper(this);
                     database.insertDataAddress(userAddress);
+
+                    tvLocation.setText(city);
 
                 } catch (IOException e) {
                     e.printStackTrace();

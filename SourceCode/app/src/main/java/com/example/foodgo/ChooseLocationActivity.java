@@ -64,7 +64,6 @@ public class ChooseLocationActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChooseLocationActivity.this, MainMenu.class);
                 intent.putExtra("userAddressManual", userAddress);
                 startActivity(intent);
-                finish();
             }
         });
 

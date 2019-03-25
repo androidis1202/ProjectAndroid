@@ -77,7 +77,6 @@ public class Login extends AppCompatActivity {
                             userinfor = myHelper.getDataUser(txtEmail.getText().toString());
                             intent.putExtra("userinfor", userinfor);
                             startActivity(intent);
-                            finish();
                             progressDialog.dismiss();
                         }
                     }, 3000);
@@ -115,7 +114,6 @@ public class Login extends AppCompatActivity {
                                     Intent intent = new Intent(Login.this, LocationActivity.class);
                                     intent.putExtra("userinfor", userinfor);
                                     startActivity(intent);
-                                    finish();
                                     // send email and id to your web server
                                 }
                             }

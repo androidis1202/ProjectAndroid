@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.foodgo.Entity.Drink;
@@ -24,6 +25,8 @@ public class Fast_Food_Menu extends Fragment {
     private List<FastFood> fastFood;
     private ListViewAdapter myAdapter;
     private TextView view;
+    private SearchView searchView;
+    private FastFood_Adapter adapter;
 
     @Nullable
     @Override
@@ -31,9 +34,28 @@ public class Fast_Food_Menu extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_drink_menu, container, false);
 
         gridView = rootView.findViewById(R.id.gridViewDrink);
+        searchView = rootView.findViewById(R.id.svDrink);
+        List<FastFood> list= getListData();
 
-        List<FastFood> image_details = getListData();
-        gridView.setAdapter(new FastFood_Adapter(getActivity(), image_details));
+        adapter = new FastFood_Adapter(getActivity(),list);
+        gridView.setAdapter(adapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapter.getFilter().filter(newText);
+
+
+                return false;
+            }
+        });
+
 
         return  rootView;
     }
