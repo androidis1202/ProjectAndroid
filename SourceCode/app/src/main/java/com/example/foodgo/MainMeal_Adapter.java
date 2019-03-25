@@ -10,20 +10,20 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.foodgo.Entity.FastFood;
-import com.example.foodgo.Entity.MainMeal;
+import com.example.foodgo.Entity.Drink;
+import com.example.foodgo.Entity.Drink;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMeal_Adapter extends BaseAdapter implements Filterable {
-    private List<MainMeal> drinks;
+    private List<Drink> drinks;
     private LayoutInflater layoutInflater;
     private Context context;
-    private List<MainMeal> fastFoodList;
+    private List<Drink> fastFoodList;
     private MainMeal_Adapter.CustomFilterMainmeal filter;
 
-    public MainMeal_Adapter(Context aContext,  List<MainMeal> drinks) {
+    public MainMeal_Adapter(Context aContext,  List<Drink> drinks) {
         this.context = aContext;
         this.drinks = drinks;
         layoutInflater = LayoutInflater.from(aContext);
@@ -58,7 +58,7 @@ public class MainMeal_Adapter extends BaseAdapter implements Filterable {
             holder = (MainMeal_Adapter.ViewHolder) convertView.getTag();
         }
 
-        MainMeal fastFood = this.drinks.get(position);
+        Drink fastFood = this.drinks.get(position);
         holder.drinkName.setText(fastFood.getName());
         holder.imageView.setImageResource(fastFood.getImage());
         holder.price.setText("$"+Float.toString(fastFood.getPrice()));
@@ -90,11 +90,11 @@ public class MainMeal_Adapter extends BaseAdapter implements Filterable {
             FilterResults  filterResults = new FilterResults();
             if(constraint !=null && constraint.length()>0){
                 constraint = constraint.toString().toUpperCase();
-                ArrayList<MainMeal> drinkArrayList  = new ArrayList<>();
+                ArrayList<Drink> drinkArrayList  = new ArrayList<>();
 
                 for(int i=0;i<fastFoodList.size();i++){
                     if(fastFoodList.get(i).getName().toUpperCase().contains(constraint)){
-                        MainMeal drink = fastFoodList.get(i);
+                        Drink drink = fastFoodList.get(i);
                         drinkArrayList.add(drink);
                     }
                 }
@@ -110,7 +110,7 @@ public class MainMeal_Adapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            drinks = (ArrayList<MainMeal>) results.values;
+            drinks = (ArrayList<Drink>) results.values;
             notifyDataSetChanged();
         }
     }

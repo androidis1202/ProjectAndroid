@@ -1,5 +1,6 @@
 package com.example.foodgo;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -43,6 +45,17 @@ public class DrinkMenu extends Fragment {
         adapter = new Drink_Adapter(getActivity(),list);
         gridView.setAdapter(adapter);
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Drink drink = (Drink) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(getActivity(), DetailFood.class);
+                intent.putExtra("info",drink);
+                startActivity(intent);
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

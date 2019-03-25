@@ -1,6 +1,7 @@
 package com.example.foodgo.Entity;
 
 import android.media.Image;
+import android.widget.ImageView;
 
 import java.io.Serializable;
 
@@ -8,7 +9,7 @@ public class Drink implements Serializable {
     private String name;
     private Integer id;
     private float price;
-    private int Image;
+    private int image;
     private String description;
 
     public String getDescription() {
@@ -23,20 +24,20 @@ public class Drink implements Serializable {
         this.name = name;
         this.id = id;
         this.price = price;
-        Image = image;
+        this.image = image;
         this.description = description;
     }
 
     public int getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(int image) {
-        Image = image;
+        this.image = image;
     }
 
 
-    public Drink(){
+    public Drink() {
     }
 
 
