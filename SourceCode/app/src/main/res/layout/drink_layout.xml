@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/border"
+    >
 
     <ImageView
 
@@ -10,24 +12,26 @@
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
+        android:layout_margin="10dip"
+        android:scaleType="fitXY"
 
         />
 
     <TextView
         android:id="@+id/txtName"
-        android:layout_width="97dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="Abczxy"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/txtPrice"
-        android:layout_width="91dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"

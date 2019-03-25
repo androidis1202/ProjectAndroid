@@ -49,16 +49,25 @@ public class ListViewFragement extends Fragment {
                     fr.commit();
                 }
                 else if(position==1){
-                    Intent intent = new Intent(parent.getContext(), Meal_Menu.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(parent.getContext(), Meal_Menu.class);
+//                    startActivity(intent);
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container, new Fast_Food_Menu());
+                    fr.commit();
                 }
                 else if(position==2){
-                    Intent intent = new Intent(parent.getContext(), Soup_Menu.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(parent.getContext(), Soup_Menu.class);
+//                    startActivity(intent);
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container, new Soup_Menu());
+                    fr.commit();
                 }
                 else if(position==3){
-                    Intent intent = new Intent(parent.getContext(), Fast_Food_Menu.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(parent.getContext(), Fast_Food_Menu.class);
+//                    startActivity(intent);
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container, new Meal_Menu());
+                    fr.commit();
                 }
             }
         });

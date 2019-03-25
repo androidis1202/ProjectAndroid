@@ -32,8 +32,6 @@ public class DrinkMenu extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_drink_menu, container, false);
 
-        ListView listView = rootView.findViewById(R.id.list_view);
-
         gridView = rootView.findViewById(R.id.gridViewDrink);
 
         List<Drink> image_details = getListData();
