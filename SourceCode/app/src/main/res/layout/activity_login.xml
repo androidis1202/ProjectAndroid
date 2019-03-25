@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_fb"
         android:layout_width="382dp"
@@ -16,9 +17,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
+        android:layout_marginTop="610dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="610dp"
         android:layout_marginBottom="122dp" />
 
     <TextView

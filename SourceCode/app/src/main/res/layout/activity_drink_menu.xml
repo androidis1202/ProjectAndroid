@@ -11,8 +11,13 @@
     <GridView
         android:id="@+id/gridViewDrink"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="2"
-        />
+        android:layout_height="wrap_content"
+        android:numColumns="2" />
+
+    <SearchView
+        android:id="@+id/svDrink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:queryHint="Type any food you want...." />
 
 </RelativeLayout>
