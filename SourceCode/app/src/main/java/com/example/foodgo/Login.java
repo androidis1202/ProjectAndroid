@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                             progressDialog.dismiss();
                         }
-                    }, 3000);
+                    }, 2000);
                 } else {
                     Toast.makeText(Login.this, "Your Account is incorrect! Please try again !", Toast.LENGTH_LONG).show();
                     return;

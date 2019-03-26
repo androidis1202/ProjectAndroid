@@ -123,6 +123,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             }
             case R.id.nav_logout: {
+
                 Intent it = new Intent(MainMenu.this, Login.class);
                 startActivity(it);
                 break;
