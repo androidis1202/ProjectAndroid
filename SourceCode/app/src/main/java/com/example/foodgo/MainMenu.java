@@ -106,13 +106,20 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_order: {
                 break;
             }
-            case R.id.nav_listFood: {
+            case R.id.nav_drink: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DrinkMenu()).commit();
                 break;
             }
-            case R.id.nav_contact: {
+            case R.id.nav_fastfood: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fast_Food_Menu()).commit();
                 break;
             }
-            case R.id.nav_address: {
+            case R.id.nav_mealmain: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Meal_Menu()).commit();
+                break;
+            }
+            case R.id.nav_soup: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Soup_Menu()).commit();
                 break;
             }
             case R.id.nav_logout: {
