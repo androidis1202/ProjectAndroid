@@ -3,14 +3,14 @@ package com.example.foodgo.Entity;
 public class Cart {
     public int foodid;
     public String foodname;
-    public long pricename;
+    public float pricename;
     public int foodimage;
     public int foodnumber;
 
     public Cart() {
     }
 
-    public Cart(int foodid, String foodname, long pricename, int foodimage, int foodnumber) {
+    public Cart(int foodid, String foodname, float pricename, int foodimage, int foodnumber) {
         this.foodid = foodid;
         this.foodname = foodname;
         this.pricename = pricename;
@@ -34,11 +34,11 @@ public class Cart {
         this.foodname = foodname;
     }
 
-    public long getPricename() {
+    public float getPricename() {
         return pricename;
     }
 
-    public void setPricename(long pricename) {
+    public void setPricename(float pricename) {
         this.pricename = pricename;
     }
 
