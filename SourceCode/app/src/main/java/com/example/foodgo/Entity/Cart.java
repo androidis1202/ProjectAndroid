@@ -4,13 +4,13 @@ public class Cart {
     public int foodid;
     public String foodname;
     public long pricename;
-    public String foodimage;
+    public int foodimage;
     public int foodnumber;
 
     public Cart() {
     }
 
-    public Cart(int foodid, String foodname, long pricename, String foodimage, int foodnumber) {
+    public Cart(int foodid, String foodname, long pricename, int foodimage, int foodnumber) {
         this.foodid = foodid;
         this.foodname = foodname;
         this.pricename = pricename;
@@ -42,11 +42,11 @@ public class Cart {
         this.pricename = pricename;
     }
 
-    public String getFoodimage() {
+    public int getFoodimage() {
         return foodimage;
     }
 
-    public void setFoodimage(String foodimage) {
+    public void setFoodimage(int foodimage) {
         this.foodimage = foodimage;
     }
 
@@ -57,5 +57,5 @@ public class Cart {
     public void setFoodnumber(int foodnumber) {
         this.foodnumber = foodnumber;
     }
-    
+
 }

@@ -22,11 +22,11 @@ public class DetailFood extends AppCompatActivity {
     private String nameOfFood = "";
     private int moneyOffood = 0;
     private String imageDetail = "";
-    private String description = "";
 
     private ImageView image;
     private TextView namefood;
     private TextView price;
+    private  TextView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,15 @@ public class DetailFood extends AppCompatActivity {
         image = findViewById(R.id.imageView3);
         namefood = findViewById(R.id.txtFoodName);
         price = findViewById(R.id.txtFoodPrice);
+        description = findViewById(R.id.txtDescription);
         Intent intent = getIntent();
         Drink drink = (Drink) intent.getSerializableExtra("info");
 
         namefood.setText(drink.getName());
         price.setText(String.valueOf(drink.getPrice()));
         image.setImageResource(drink.getImage());
+        description.setText(drink.getDescription());
+
 
         Integer[] number = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         spinner = findViewById(R.id.spinner);

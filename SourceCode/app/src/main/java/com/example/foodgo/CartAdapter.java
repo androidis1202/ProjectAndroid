@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.foodgo.Entity.Cart;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartAdapter extends BaseAdapter {
@@ -51,18 +52,23 @@ public class CartAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
-        if(convertView == null)
-        {
+        if (convertView == null) {
             viewHolder = new ViewHolder();
-            LayoutInflater inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             viewHolder.txtNameFood = convertView.findViewById(R.id.txtlistview_foodName);
             viewHolder.txtPriceFood = convertView.findViewById(R.id.txtListViewFood_Price);
             viewHolder.imgCart = convertView.findViewById(R.id.img_Food);
             viewHolder.btnMinus = convertView.findViewById(R.id.btnMinus);
             viewHolder.btnSum = convertView.findViewById(R.id.btnNumber);
             viewHolder.btnPlus = convertView.findViewById(R.id.btnPlus);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        Cart cart = (Cart) getItem(position);
+        viewHolder.txtNameFood.setText(cart.getFoodname());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
+        viewHolder.txtPriceFood.setText(decimalFormat.format(decimalFormat.format(cart.getPricename())) + "$");
+        viewHolder.imgCart.setImageResource(cart.getFoodimage());
         return convertView;
     }
 }
