@@ -21,7 +21,7 @@ public class DetailFood extends AppCompatActivity {
     private int id = 0;
     private String nameOfFood = "";
     private int moneyOffood = 0;
-    private String imageDetail = "";
+    private int imageDetail;
 
     private ImageView image;
     private TextView namefood;
