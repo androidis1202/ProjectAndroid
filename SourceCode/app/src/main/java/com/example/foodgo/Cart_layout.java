@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.foodgo.Entity.Drink;
@@ -36,11 +37,9 @@ public class Cart_layout extends AppCompatActivity {
         txtSum = findViewById(R.id.txtSumOfMoney);
         btnPay = findViewById(R.id.btnSubmitCart);
         btnContinue = findViewById(R.id.btnContinue);
-        if(MainMenu.cartArrayList.size() <= 0)
-        {
+        if (MainMenu.cartArrayList.size() <= 0) {
             txtInformation.setVisibility(View.VISIBLE);
-        }else
-        {
+        } else {
             txtInformation.setVisibility(View.INVISIBLE);
         }
 
@@ -55,16 +54,15 @@ public class Cart_layout extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(MainMenu.cartArrayList.size()<0)
-                        {
+                        if (MainMenu.cartArrayList.size() < 0) {
                             txtInformation.setVisibility(View.VISIBLE);
-                        }else{
+                        } else {
                             MainMenu.cartArrayList.remove(position);
                             cartAdapter.notifyDataSetChanged();
                             sum();
-                            if(MainMenu.cartArrayList.size()<=0){
+                            if (MainMenu.cartArrayList.size() <= 0) {
                                 txtInformation.setVisibility(View.VISIBLE);
-                            }else {
+                            } else {
                                 txtInformation.setVisibility(View.INVISIBLE);
                                 cartAdapter.notifyDataSetChanged();
                                 sum();
@@ -76,8 +74,8 @@ public class Cart_layout extends AppCompatActivity {
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                          cartAdapter.notifyDataSetChanged();
-                          sum();
+                        cartAdapter.notifyDataSetChanged();
+                        sum();
                     }
                 });
                 builder.show();
@@ -85,6 +83,19 @@ public class Cart_layout extends AppCompatActivity {
             }
         });
         card.setAdapter(cartAdapter);
+
+
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainMenu.cartArrayList != null)
+                {
+                    Toast.makeText(Cart_layout.this, "Submit success", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(Cart_layout.this, "Submit is not success", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     public static void sum() {

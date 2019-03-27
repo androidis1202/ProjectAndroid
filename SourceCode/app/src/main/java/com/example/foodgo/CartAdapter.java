@@ -70,6 +70,7 @@ public class CartAdapter extends BaseAdapter {
         viewHolder.txtNameFood.setText(cart.getFoodname());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
         viewHolder.txtPriceFood.setText(decimalFormat.format(cart.getPricename()) + "$");
+        viewHolder.btnSum.setText(String.valueOf(MainMenu.cartArrayList.get(position).getFoodnumber()));
         viewHolder.imgCart.setImageResource(cart.getFoodimage());
         final ViewHolder finalViewHolder = viewHolder;
         final ViewHolder finalViewHolder1 = viewHolder;
