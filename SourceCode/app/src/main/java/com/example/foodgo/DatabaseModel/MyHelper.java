@@ -96,6 +96,15 @@ public class MyHelper extends SQLiteOpenHelper {
         return user;
     }
 
+
+    public void updatePassword(String email, String password) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String UPDATE = "UPDATE " + USER_TABLE + "set PASSWORD = '" + password + "' where USERNAME ='" + email + "'";
+        db.rawQuery(UPDATE, null);
+        db.close();
+    }
+
     public boolean checkExistAccount(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(USER_TABLE, new String[]{"ID"}, "USERNAME = ?", new String[]{username}, null, null, null);

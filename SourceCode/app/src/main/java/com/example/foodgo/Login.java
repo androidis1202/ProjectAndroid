@@ -8,9 +8,12 @@ import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,13 +34,15 @@ import java.util.Arrays;
 
 public class Login extends AppCompatActivity {
 
-    private Button btnForgot;
+    private TextView txtForgot;
+
     private Button btnSign_up;
     private Button btnLogin;
     private EditText txtEmail, txtPassword;
     private TextView txtTitle;
     private MyHelper myHelper;
     private LoginButton btn_FB;
+    private CheckBox cbShowPassword;
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
     private static User userinfor = new User();
@@ -47,7 +52,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        txtForgot = findViewById(R.id.txtForgot);
+        cbShowPassword = findViewById(R.id.cbShowPassword);
         btnSign_up = findViewById(R.id.btnSignup_login);
         btnLogin = findViewById(R.id.txtSign_in);
         txtEmail = findViewById(R.id.editText_email_sign_in);
@@ -86,7 +92,25 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
+        txtForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgotPassword = new Intent(Login.this, ForgotPassword.class);
+                startActivityForResult(forgotPassword, 100);
+            }
+        });
+        cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    txtPassword.setInputType(129);
+                    //   showPassword();
+                }
+                else {
+                    txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
 
         btn_FB = (LoginButton) findViewById(R.id.btn_fb);
         btn_FB.setReadPermissions(Arrays.asList(EMAIL));
