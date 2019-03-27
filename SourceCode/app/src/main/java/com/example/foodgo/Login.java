@@ -102,11 +102,10 @@ public class Login extends AppCompatActivity {
         cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked){
+                if (!isChecked) {
                     txtPassword.setInputType(129);
                     //   showPassword();
-                }
-                else {
+                } else {
                     txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
             }

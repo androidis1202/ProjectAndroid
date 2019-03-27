@@ -44,8 +44,9 @@ public class ForgotPassword extends AppCompatActivity {
             Intent accountIntents = new Intent(this, ConfirmPassword.class);
             accountIntents.putExtra("EMAIL", txtEmail.getText().toString().trim());
             startActivity(accountIntents);
-        }else {
+        }else if(checkExistAcc == false){
             Toast.makeText(this, "Email not exist", Toast.LENGTH_LONG).show();
+            return;
         }
     }
 }
