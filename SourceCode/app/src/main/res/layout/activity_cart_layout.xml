@@ -77,13 +77,14 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
+
     <Button
-        android:text="Continue To Buy"
-        android:background="#FFD600"
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:id="@+id/btnContinue"
         android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:background="#FFD600"
+        android:text="Continue To Buy" />
 </LinearLayout>

@@ -55,7 +55,7 @@ public class CartAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_cart,null);
+            convertView = inflater.inflate(R.layout.listview_cart, null);
             viewHolder.txtNameFood = convertView.findViewById(R.id.txtlistview_foodName);
             viewHolder.txtPriceFood = convertView.findViewById(R.id.txtListViewFood_Price);
             viewHolder.imgCart = convertView.findViewById(R.id.img_Food);
@@ -81,9 +81,9 @@ public class CartAdapter extends BaseAdapter {
 
                 int numberupdate = Integer.parseInt(finalViewHolder.btnSum.getText().toString()) + 1;
                 int numbernow = MainMenu.cartArrayList.get(position).getFoodnumber();
-                float pricenow =MainMenu.cartArrayList.get(position).getPricename();
+                float pricenow = MainMenu.cartArrayList.get(position).getPricename();
                 MainMenu.cartArrayList.get(position).setFoodnumber(numberupdate);
-                float pricenewest = (numberupdate * pricenow)/numbernow;
+                float pricenewest = (numberupdate * pricenow) / numbernow;
                 MainMenu.cartArrayList.get(position).setPricename(pricenewest);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
                 finalViewHolder1.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
@@ -98,9 +98,14 @@ public class CartAdapter extends BaseAdapter {
 
                 int numberupdate = Integer.parseInt(finalViewHolder.btnSum.getText().toString()) - 1;
                 int numbernow = MainMenu.cartArrayList.get(position).getFoodnumber();
-                float pricenow =MainMenu.cartArrayList.get(position).getPricename();
+                float pricenow = MainMenu.cartArrayList.get(position).getPricename();
                 MainMenu.cartArrayList.get(position).setFoodnumber(numberupdate);
-                float pricenewest = (numberupdate * pricenow)/numbernow;
+                float pricenewest = (numberupdate * pricenow) / numbernow;
+                if (numberupdate < 0) {
+                    numberupdate = 0;
+                    pricenewest = 0;
+                    MainMenu.cartArrayList.get(position).setFoodnumber(0);
+                }
                 MainMenu.cartArrayList.get(position).setPricename(pricenewest);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
                 finalViewHolder1.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");

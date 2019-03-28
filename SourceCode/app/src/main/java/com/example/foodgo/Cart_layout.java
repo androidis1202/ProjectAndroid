@@ -83,7 +83,14 @@ public class Cart_layout extends AppCompatActivity {
             }
         });
         card.setAdapter(cartAdapter);
-
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Cart_layout.this,DetailFood.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
