@@ -77,10 +77,10 @@ public class Soup_Menu extends Fragment {
     private  List<Drink> getListData() {
 
         List<Drink> list = new ArrayList<Drink>();
-        list.add(new Drink("Drink Menu",1,125f, R.drawable.soup,"Good"));
-        list.add(new Drink("Fast Food Menu",2,125f, R.drawable.soup,"Good"));
-        list.add(new Drink("Soup Menu",3,125f, R.drawable.soup,"Good"));
-        list.add(new Drink("Main Meal Menu",4,125f,R.drawable.soup,"Good"));
+        list.add(new Drink("Drink Menu",13,125f, R.drawable.soup,"Good"));
+        list.add(new Drink("Fast Food Menu",14,125f, R.drawable.soup,"Good"));
+        list.add(new Drink("Soup Menu",15,125f, R.drawable.soup,"Good"));
+        list.add(new Drink("Main Meal Menu",16,125f,R.drawable.soup,"Good"));
 
         return list;
     }

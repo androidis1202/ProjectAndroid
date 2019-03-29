@@ -12,7 +12,7 @@
         android:id="@+id/toolbarcart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/yellow"
         app:title="Your Cart"></android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +60,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="end|center">
+
             <TextView
+                android:id="@+id/txtSumOfMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Value"
@@ -75,13 +77,14 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
+
     <Button
-        android:text="Continue To Buy"
-        android:background="#FFD600"
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:id="@+id/btnContinue"
         android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:background="#FFD600"
+        android:text="Continue To Buy" />
 </LinearLayout>

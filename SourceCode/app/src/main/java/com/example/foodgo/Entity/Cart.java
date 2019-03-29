@@ -3,19 +3,22 @@ package com.example.foodgo.Entity;
 public class Cart {
     public int foodid;
     public String foodname;
-    public long pricename;
-    public String foodimage;
+    public float pricename;
+    public int foodimage;
     public int foodnumber;
+    public String user;
 
     public Cart() {
     }
 
-    public Cart(int foodid, String foodname, long pricename, String foodimage, int foodnumber) {
+
+    public Cart(int foodid, String foodname, float pricename, int foodimage, int foodnumber, String user) {
         this.foodid = foodid;
         this.foodname = foodname;
         this.pricename = pricename;
         this.foodimage = foodimage;
         this.foodnumber = foodnumber;
+        this.user = user;
     }
 
     public int getFoodid() {
@@ -34,19 +37,19 @@ public class Cart {
         this.foodname = foodname;
     }
 
-    public long getPricename() {
+    public float getPricename() {
         return pricename;
     }
 
-    public void setPricename(long pricename) {
+    public void setPricename(float pricename) {
         this.pricename = pricename;
     }
 
-    public String getFoodimage() {
+    public int getFoodimage() {
         return foodimage;
     }
 
-    public void setFoodimage(String foodimage) {
+    public void setFoodimage(int foodimage) {
         this.foodimage = foodimage;
     }
 
@@ -57,5 +60,13 @@ public class Cart {
     public void setFoodnumber(int foodnumber) {
         this.foodnumber = foodnumber;
     }
-    
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
 }

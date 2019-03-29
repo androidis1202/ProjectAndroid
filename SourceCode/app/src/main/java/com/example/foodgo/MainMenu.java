@@ -104,6 +104,8 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_order: {
+                Intent intent = new Intent(MainMenu.this,Cart_layout.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_drink: {
@@ -128,7 +130,6 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(it);
                 break;
             }
-
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

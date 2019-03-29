@@ -18,15 +18,12 @@ public class DetailFood extends AppCompatActivity {
     private Spinner spinner;
     private Button addtocart;
 
-    private int id = 0;
-    private String nameOfFood = "";
-    private int moneyOffood = 0;
-    private String imageDetail = "";
-    private String description = "";
-
     private ImageView image;
     private TextView namefood;
     private TextView price;
+    private TextView description;
+    //public int number1;
+    public Integer[] number = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,44 +32,44 @@ public class DetailFood extends AppCompatActivity {
         image = findViewById(R.id.imageView3);
         namefood = findViewById(R.id.txtFoodName);
         price = findViewById(R.id.txtFoodPrice);
+        description = findViewById(R.id.txtDescription);
         Intent intent = getIntent();
-        Drink drink = (Drink) intent.getSerializableExtra("info");
+        final Drink drink = (Drink) intent.getSerializableExtra("info");
 
         namefood.setText(drink.getName());
         price.setText(String.valueOf(drink.getPrice()));
         image.setImageResource(drink.getImage());
+        description.setText(drink.getDescription());
 
-        Integer[] number = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         spinner = findViewById(R.id.spinner);
         ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.support_simple_spinner_dropdown_item, number);
         spinner.setAdapter(arrayAdapter);
 
-        float sumofMoney = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
+        float sumofMoney = (Integer.parseInt(spinner.getSelectedItem().toString()) + 1) * drink.getPrice();
         price.setText(String.valueOf(sumofMoney));
 
         addtocart = findViewById(R.id.addtocard);
+        //number1 = Integer.parseInt(spinner.getSelectedItem().toString());
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MainMenu.cartArrayList.size() > 0) {
-                    int number = Integer.parseInt(spinner.getSelectedItem().toString());
-                    boolean checkExistCard = false;
+                    int checkExistCard = 0;
                     for (int i = 0; i < MainMenu.cartArrayList.size(); i++) {
-                        if (MainMenu.cartArrayList.get(i).getFoodid() == id) {
-                            MainMenu.cartArrayList.get(i).setFoodnumber(MainMenu.cartArrayList.get(i).getFoodnumber() + number);
+                        if (MainMenu.cartArrayList.get(i).getFoodid() == drink.getId()) {
+                            MainMenu.cartArrayList.get(i).setFoodnumber(MainMenu.cartArrayList.get(i).getFoodnumber() + Integer.parseInt(spinner.getSelectedItem().toString()));
+                            checkExistCard = 1;
                         }
-                        MainMenu.cartArrayList.get(i).setPricename(moneyOffood * MainMenu.cartArrayList.get(i).getFoodnumber());
-                        checkExistCard = true;
+                        MainMenu.cartArrayList.get(i).setPricename(drink.getPrice() * MainMenu.cartArrayList.get(i).getFoodnumber());
                     }
-                    if (checkExistCard == false) {
-                        int number1 = Integer.parseInt(spinner.getSelectedItem().toString());
-                        long sum = number1 * moneyOffood;
-                        MainMenu.cartArrayList.add(new Cart(id, nameOfFood, sum, imageDetail, number1));
+                    if (checkExistCard == 0) {
+                        float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
+                        MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), LocationActivity.userInfor.getUsername()));
                     }
                 } else {
-                    int number = Integer.parseInt(spinner.getSelectedItem().toString());
-                    long sum = number * moneyOffood;
-                    MainMenu.cartArrayList.add(new Cart(id, nameOfFood, sum, imageDetail, number));
+                    //int number = Integer.parseInt(spinner.getSelectedItem().toString());
+                    float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
+                    MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), LocationActivity.userInfor.getUsername()));
                 }
                 Intent intent = new Intent(getApplicationContext(), Cart_layout.class);
                 startActivity(intent);
