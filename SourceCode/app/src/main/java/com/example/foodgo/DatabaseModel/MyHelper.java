@@ -66,6 +66,19 @@ public class MyHelper extends SQLiteOpenHelper {
         db.insert(USER_TABLE1, null, contentValues);
         db.close();
     }
+    public UserAddress getDataAddress(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String SELECT = "SELECT * FROM " + USER_TABLE1 + " WHERE EMAIL = '" + email + "'";
+        Cursor cursor = db.rawQuery(SELECT, null);
+
+        UserAddress userAddress = new UserAddress();
+        if (cursor.moveToLast()) {
+            userAddress.setEmail(cursor.getString(cursor.getColumnIndex("EMAIL")));
+            userAddress.setCity(cursor.getString(cursor.getColumnIndex("CITY")));
+        }
+        db.close();
+        return userAddress;
+    }
 
     public boolean checkAccountLogin(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();

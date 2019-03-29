@@ -67,7 +67,6 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                 userAddress = getLocation();
                 if (userAddress != null) {
                     Intent intent = new Intent(LocationActivity.this, MainMenu.class);
-                    intent.putExtra("userAddress", userAddress);
                     startActivity(intent);
                 }
             }

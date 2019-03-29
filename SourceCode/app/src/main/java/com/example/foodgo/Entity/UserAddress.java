@@ -16,6 +16,11 @@ public class UserAddress implements Serializable {
 
     }
 
+    public UserAddress(String city, String email) {
+        this.city = city;
+        this.email = email;
+    }
+
     public UserAddress(String address, String city, String state, String country, String postalCode, String knownName, String email) {
         this.address = address;
         this.city = city;

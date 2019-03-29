@@ -73,8 +73,14 @@ public class CartAdapter extends BaseAdapter {
         viewHolder.btnSum.setText(String.valueOf(MainMenu.cartArrayList.get(position).getFoodnumber()));
         viewHolder.imgCart.setImageResource(cart.getFoodimage());
         final ViewHolder finalViewHolder = viewHolder;
-        final ViewHolder finalViewHolder1 = viewHolder;
-        final ViewHolder finalViewHolder3 = viewHolder;
+        if (MainMenu.cartArrayList.get(position).getFoodnumber() == 1) {
+            viewHolder.btnMinus.setEnabled(false);
+            viewHolder.btnMinus.setVisibility(View.INVISIBLE);
+        }else
+        {
+            viewHolder.btnMinus.setEnabled(true);
+            viewHolder.btnMinus.setVisibility(View.VISIBLE);
+        }
         viewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,14 +92,11 @@ public class CartAdapter extends BaseAdapter {
                 float pricenewest = (numberupdate * pricenow) / numbernow;
                 MainMenu.cartArrayList.get(position).setPricename(pricenewest);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
-                finalViewHolder1.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
+                finalViewHolder.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
                 Cart_layout.sum();
-                finalViewHolder3.btnSum.setText(String.valueOf(numberupdate));
+                finalViewHolder.btnSum.setText(String.valueOf(numberupdate));
             }
         });
-        final ViewHolder finalViewHolder2 = viewHolder;
-        final ViewHolder finalViewHolder4 = viewHolder;
-        final ViewHolder finalViewHolder5 = viewHolder;
         viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,19 +106,18 @@ public class CartAdapter extends BaseAdapter {
                 float pricenow = MainMenu.cartArrayList.get(position).getPricename();
                 MainMenu.cartArrayList.get(position).setFoodnumber(numberupdate);
                 float pricenewest = (numberupdate * pricenow) / numbernow;
-                if (numberupdate <= 0) {
-                    numberupdate = 0;
-                    pricenewest = 0;
-                    MainMenu.cartArrayList.remove(position);
-                    finalViewHolder5.btnMinus.setEnabled(false);
-                    finalViewHolder2.btnSum.setText("0");
-                    Cart_layout.txtSum.setText("0$");
+                if (numberupdate <= 1) {
+                    numberupdate = 1;
+                    finalViewHolder.btnMinus.setEnabled(false);
+                    finalViewHolder.btnMinus.setVisibility(View.INVISIBLE);
                 } else {
                     MainMenu.cartArrayList.get(position).setPricename(pricenewest);
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
-                    finalViewHolder1.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
+                    finalViewHolder.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
+                    finalViewHolder.btnMinus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnMinus.setEnabled(true);
                     Cart_layout.sum();
-                    finalViewHolder2.btnSum.setText(String.valueOf(numberupdate));
+                    finalViewHolder.btnSum.setText(String.valueOf(numberupdate));
                 }
             }
         });

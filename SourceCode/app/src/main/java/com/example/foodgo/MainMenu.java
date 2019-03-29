@@ -34,6 +34,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     private DrawerLayout drawer;
     private String email;
     private MyHelper myHelper;
+    private TextView location;
     public static ArrayList<Cart> cartArrayList;
 
     @Override
@@ -45,17 +46,25 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         Intent intent = this.getIntent();
         view = findViewById(R.id.textView2);
         myHelper = new MyHelper(this);
+
         UserAddress userAddress = new UserAddress();
-        userAddress = (UserAddress) intent.getSerializableExtra("userAddress");
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         TextView username = headerView.findViewById(R.id.txtNameOfUser);
         username.setText(userAddress.getEmail());
+        userAddress = myHelper.getDataAddress(LocationActivity.userInfor.getUsername());
         User user = new User();
         user = myHelper.getDataUser(userAddress.getEmail());
         TextView firstname = headerView.findViewById(R.id.txtFirstOfUser);
         firstname.setText("Hello " + LocationActivity.userInfor.getFirstname());
-
+        location = headerView.findViewById(R.id.locationOfUser);
+        if(userAddress == null)
+        {
+            location.setText("");
+        }else
+        {
+            location.setText("Your location : " + userAddress.getCity());
+        }
         if (cartArrayList != null) {
 
         } else {
