@@ -1,5 +1,6 @@
 package com.example.foodgo;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.example.foodgo.DatabaseModel.MyHelper;
+import com.example.foodgo.Entity.Cart;
 import com.example.foodgo.Entity.Drink;
+import com.example.foodgo.Entity.User;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +31,7 @@ public class Cart_layout extends AppCompatActivity {
     Button btnPay, btnContinue;
     Toolbar toolbarcart;
     CartAdapter cartAdapter;
-
+    MyHelper myHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +41,15 @@ public class Cart_layout extends AppCompatActivity {
         txtSum = findViewById(R.id.txtSumOfMoney);
         btnPay = findViewById(R.id.btnSubmitCart);
         btnContinue = findViewById(R.id.btnContinue);
+        myHelper = new MyHelper(this);
         if (MainMenu.cartArrayList.size() <= 0) {
             txtInformation.setVisibility(View.VISIBLE);
         } else {
             txtInformation.setVisibility(View.INVISIBLE);
         }
+
+
+
 
         sum();
         cartAdapter = new CartAdapter(this, MainMenu.cartArrayList);
@@ -54,7 +62,7 @@ public class Cart_layout extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (MainMenu.cartArrayList.size() < 0) {
+                        if (MainMenu.cartArrayList.size() <= 0 || txtSum.getText().toString().equalsIgnoreCase("0$")) {
                             txtInformation.setVisibility(View.VISIBLE);
                         } else {
                             MainMenu.cartArrayList.remove(position);
@@ -78,7 +86,8 @@ public class Cart_layout extends AppCompatActivity {
                         sum();
                     }
                 });
-                builder.show();
+                AlertDialog alert11 = builder.create();
+                alert11.show();
                 return true;
             }
         });
@@ -86,20 +95,45 @@ public class Cart_layout extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Cart_layout.this,DetailFood.class);
-                startActivity(intent);
-                finish();
+                Intent intent = new Intent(getApplicationContext(),LocationActivity.class);
+                getApplicationContext().startActivity(intent);
             }
         });
 
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainMenu.cartArrayList != null)
+                if (MainMenu.cartArrayList.size() != 0)
                 {
-                    Toast.makeText(Cart_layout.this, "Submit success", Toast.LENGTH_LONG).show();
+                    for(Cart cart : MainMenu.cartArrayList)
+                    {
+                        myHelper.insertCart(cart);
+                    }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Cart_layout.this);
+                    builder.setMessage("You buy successful");
+                    builder.setTitle("Success");
+                    builder.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder.create();
+                    alert11.show();
                 }else{
-                    Toast.makeText(Cart_layout.this, "Submit is not success", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Cart_layout.this);
+                    builder.setMessage("No cart.Please add your products");
+                    builder.setTitle("Success");
+                    builder.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder.create();
+                    alert11.show();
                 }
             }
         });
@@ -110,7 +144,6 @@ public class Cart_layout extends AppCompatActivity {
         for (int i = 0; i < MainMenu.cartArrayList.size(); i++) {
             sum += MainMenu.cartArrayList.get(i).getPricename();
         }
-
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txtSum.setText(decimalFormat.format(sum) + "$");
     }

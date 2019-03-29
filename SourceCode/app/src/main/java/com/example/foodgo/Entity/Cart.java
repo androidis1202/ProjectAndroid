@@ -6,16 +6,19 @@ public class Cart {
     public float pricename;
     public int foodimage;
     public int foodnumber;
+    public String user;
 
     public Cart() {
     }
 
-    public Cart(int foodid, String foodname, float pricename, int foodimage, int foodnumber) {
+
+    public Cart(int foodid, String foodname, float pricename, int foodimage, int foodnumber, String user) {
         this.foodid = foodid;
         this.foodname = foodname;
         this.pricename = pricename;
         this.foodimage = foodimage;
         this.foodnumber = foodnumber;
+        this.user = user;
     }
 
     public int getFoodid() {
@@ -56,6 +59,14 @@ public class Cart {
 
     public void setFoodnumber(int foodnumber) {
         this.foodnumber = foodnumber;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
 }

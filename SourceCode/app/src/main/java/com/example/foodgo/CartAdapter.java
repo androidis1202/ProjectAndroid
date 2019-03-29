@@ -92,6 +92,8 @@ public class CartAdapter extends BaseAdapter {
             }
         });
         final ViewHolder finalViewHolder2 = viewHolder;
+        final ViewHolder finalViewHolder4 = viewHolder;
+        final ViewHolder finalViewHolder5 = viewHolder;
         viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,16 +103,20 @@ public class CartAdapter extends BaseAdapter {
                 float pricenow = MainMenu.cartArrayList.get(position).getPricename();
                 MainMenu.cartArrayList.get(position).setFoodnumber(numberupdate);
                 float pricenewest = (numberupdate * pricenow) / numbernow;
-                if (numberupdate < 0) {
+                if (numberupdate <= 0) {
                     numberupdate = 0;
                     pricenewest = 0;
-                    MainMenu.cartArrayList.get(position).setFoodnumber(0);
+                    MainMenu.cartArrayList.remove(position);
+                    finalViewHolder5.btnMinus.setEnabled(false);
+                    finalViewHolder2.btnSum.setText("0");
+                    Cart_layout.txtSum.setText("0$");
+                } else {
+                    MainMenu.cartArrayList.get(position).setPricename(pricenewest);
+                    DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
+                    finalViewHolder1.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
+                    Cart_layout.sum();
+                    finalViewHolder2.btnSum.setText(String.valueOf(numberupdate));
                 }
-                MainMenu.cartArrayList.get(position).setPricename(pricenewest);
-                DecimalFormat decimalFormat = new DecimalFormat("###,###,####");
-                finalViewHolder1.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
-                Cart_layout.sum();
-                finalViewHolder2.btnSum.setText(String.valueOf(numberupdate));
             }
         });
         return convertView;

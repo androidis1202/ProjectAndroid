@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.foodgo.Entity.Cart;
 import com.example.foodgo.Entity.User;
 import com.example.foodgo.Entity.UserAddress;
 
@@ -13,6 +14,7 @@ public class MyHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "User.db";
     public static final String USER_TABLE = "user_table";
     public static final String USER_TABLE1 = "address_table";
+    public static final String USER_TABLE2 = "cart_table";
 
 
     public MyHelper(Context context) {
@@ -23,13 +25,14 @@ public class MyHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + USER_TABLE + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT , LASTNAME TEXT, ADDRESS TEXT, PHONENUMBER TEXT, USERNAME TEXT, PASSWORD TEXT)");
         db.execSQL("create table " + USER_TABLE1 + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, ADDRESS TEXT , CITY TEXT,STATE TEXT, COUNTRY TEXT,POSTALCODE TEXT, KNOWNNAME TEXT,EMAIL TEXT )");
+        db.execSQL("create table " + USER_TABLE2 + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, FOODNAME TEXT , PRICENAME TEXT,FOODNUMBER TEXT, USER TEXT)");
     }
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE1);
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE2);
         onCreate(db);
     }
 
@@ -78,12 +81,11 @@ public class MyHelper extends SQLiteOpenHelper {
 
     public User getDataUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String SELECT = "SELECT * FROM " + USER_TABLE + " WHERE USERNAME = '" + username +"'";
+        String SELECT = "SELECT * FROM " + USER_TABLE + " WHERE USERNAME = '" + username + "'";
         Cursor cursor = db.rawQuery(SELECT, null);
 
         User user = new User();
-        if (cursor.moveToLast())
-        {
+        if (cursor.moveToLast()) {
             user.setId(cursor.getInt(cursor.getColumnIndex("ID")));
             user.setFirstname(cursor.getString(cursor.getColumnIndex("FIRSTNAME")));
             user.setLastname(cursor.getString(cursor.getColumnIndex("LASTNAME")));
@@ -103,8 +105,8 @@ public class MyHelper extends SQLiteOpenHelper {
 //        String UPDATE = "UPDATE " + USER_TABLE + " set PASSWORD = '" + password + "' where USERNAME ='" + email + "'";
 //        db.rawQuery(UPDATE, null);
         ContentValues contentValues = new ContentValues();
-        contentValues.put("PASSWORD",password);
-        db.update(USER_TABLE, contentValues,"USERNAME = ? ", new String[]{email});
+        contentValues.put("PASSWORD", password);
+        db.update(USER_TABLE, contentValues, "USERNAME = ? ", new String[]{email});
     }
 
     public boolean checkExistAccount(String username) {
@@ -117,5 +119,16 @@ public class MyHelper extends SQLiteOpenHelper {
             return true;
         }
         return false;
+    }
+
+    public void insertCart(Cart cart) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("FOODNAME", cart.getFoodname());
+        contentValues.put("PRICENAME", String.valueOf(cart.getPricename()));
+        contentValues.put("FOODNUMBER", String.valueOf(cart.getFoodnumber()));
+        contentValues.put("USER", cart.getUser());
+        db.insert(USER_TABLE2, null, contentValues);
+        db.close();
     }
 }
