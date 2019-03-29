@@ -21,9 +21,10 @@ public class DetailFood extends AppCompatActivity {
     private ImageView image;
     private TextView namefood;
     private TextView price;
-    private  TextView description;
+    private TextView description;
     //public int number1;
-    public Integer[] number = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    public Integer[] number = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class DetailFood extends AppCompatActivity {
         ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.support_simple_spinner_dropdown_item, number);
         spinner.setAdapter(arrayAdapter);
 
-        float sumofMoney = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
+        float sumofMoney = (Integer.parseInt(spinner.getSelectedItem().toString()) + 1) * drink.getPrice();
         price.setText(String.valueOf(sumofMoney));
 
         addtocart = findViewById(R.id.addtocard);
@@ -52,25 +53,25 @@ public class DetailFood extends AppCompatActivity {
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              if (MainMenu.cartArrayList.size() > 0) {
-                 int checkExistCard = 0;
-                 for (int i = 0; i < MainMenu.cartArrayList.size(); i++) {
-                     if (MainMenu.cartArrayList.get(i).getFoodid() == drink.getId()) {
-                         MainMenu.cartArrayList.get(i).setFoodnumber(MainMenu.cartArrayList.get(i).getFoodnumber() + Integer.parseInt(spinner.getSelectedItem().toString()));
-                         checkExistCard = 1;
-                     }
-                     MainMenu.cartArrayList.get(i).setPricename(drink.getPrice() * MainMenu.cartArrayList.get(i).getFoodnumber());
-                 }
-                 if (checkExistCard == 0) {
-                     float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
-                     MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString())));
-                 }
-             } else {
-                //int number = Integer.parseInt(spinner.getSelectedItem().toString());
-                float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
-                MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString())));
-           }
-            Intent intent = new Intent(getApplicationContext(), Cart_layout.class);
+                if (MainMenu.cartArrayList.size() > 0) {
+                    int checkExistCard = 0;
+                    for (int i = 0; i < MainMenu.cartArrayList.size(); i++) {
+                        if (MainMenu.cartArrayList.get(i).getFoodid() == drink.getId()) {
+                            MainMenu.cartArrayList.get(i).setFoodnumber(MainMenu.cartArrayList.get(i).getFoodnumber() + Integer.parseInt(spinner.getSelectedItem().toString()));
+                            checkExistCard = 1;
+                        }
+                        MainMenu.cartArrayList.get(i).setPricename(drink.getPrice() * MainMenu.cartArrayList.get(i).getFoodnumber());
+                    }
+                    if (checkExistCard == 0) {
+                        float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
+                        MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), LocationActivity.userInfor.getUsername()));
+                    }
+                } else {
+                    //int number = Integer.parseInt(spinner.getSelectedItem().toString());
+                    float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
+                    MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), LocationActivity.userInfor.getUsername()));
+                }
+                Intent intent = new Intent(getApplicationContext(), Cart_layout.class);
                 startActivity(intent);
             }
         });
