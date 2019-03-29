@@ -130,6 +130,10 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(it);
                 break;
             }
+            case R.id.nav_contact: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Contact_Fragment()).commit();
+                break;
+            }
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

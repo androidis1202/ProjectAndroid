@@ -37,10 +37,6 @@
                 android:icon="@drawable/ic_contact"
                 android:title="Contact" />
             <item
-                android:id="@+id/nav_comment"
-                android:icon="@drawable/ic_chat"
-                android:title="Comment" />
-            <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/com_facebook_tooltip_blue_xout"
                 android:title="Logout" />

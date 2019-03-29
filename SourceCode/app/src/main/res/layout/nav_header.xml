@@ -35,5 +35,9 @@
 
     </TextView>
 
-
+    <TextView
+        android:text="bbbbbbbbbbb"
+        android:id="@+id/locationOfUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
