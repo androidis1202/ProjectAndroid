@@ -54,7 +54,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         User user = new User();
         user = myHelper.getDataUser(userAddress.getEmail());
         TextView firstname = headerView.findViewById(R.id.txtFirstOfUser);
-        firstname.setText("Hello " + user.getFirstname());
+        firstname.setText("Hello " + LocationActivity.userInfor.getFirstname());
 
         if (cartArrayList != null) {
 
