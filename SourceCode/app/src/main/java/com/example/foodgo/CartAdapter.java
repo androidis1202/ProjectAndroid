@@ -95,6 +95,7 @@ public class CartAdapter extends BaseAdapter {
                 finalViewHolder.txtPriceFood.setText(decimalFormat.format(pricenewest) + "$");
                 Cart_layout.sum();
                 finalViewHolder.btnSum.setText(String.valueOf(numberupdate));
+                notifyDataSetChanged();
             }
         });
         viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +120,7 @@ public class CartAdapter extends BaseAdapter {
                     Cart_layout.sum();
                     finalViewHolder.btnSum.setText(String.valueOf(numberupdate));
                 }
+                notifyDataSetChanged();
             }
         });
         return convertView;

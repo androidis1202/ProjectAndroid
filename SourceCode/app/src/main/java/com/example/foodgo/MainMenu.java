@@ -58,9 +58,9 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         TextView firstname = headerView.findViewById(R.id.txtFirstOfUser);
         firstname.setText("Hello " + LocationActivity.userInfor.getFirstname());
         location = headerView.findViewById(R.id.locationOfUser);
-        if(userAddress == null)
+        if(userAddress.getCity() == null)
         {
-            location.setText("");
+            location.setText("You need to open GPS");
         }else
         {
             location.setText("Your location : " + userAddress.getCity());

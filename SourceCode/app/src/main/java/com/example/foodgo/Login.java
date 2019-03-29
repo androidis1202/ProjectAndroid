@@ -104,7 +104,6 @@ public class Login extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!isChecked) {
                     txtPassword.setInputType(129);
-                    //   showPassword();
                 } else {
                     txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
@@ -113,20 +112,16 @@ public class Login extends AppCompatActivity {
 
         btn_FB = (LoginButton) findViewById(R.id.btn_fb);
         btn_FB.setReadPermissions(Arrays.asList(EMAIL));
-        // If you are using in a fragment, call loginButton.setFragment(this);
         mCallbackManager = CallbackManager.Factory.create();
-        // Callback registration
         btn_FB.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
                 Toast.makeText(Login.this, "Your Account is IN FACEBOOK !", Toast.LENGTH_LONG).show();
                 GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject me, GraphResponse response) {
                                 if (response.getError() != null) {
-                                    // handle error
                                 } else {
                                     userinfor.setPassword(me.optString("id"));
                                     userinfor.setFirstname(me.optString("name"));
@@ -137,7 +132,6 @@ public class Login extends AppCompatActivity {
                                     Intent intent = new Intent(Login.this, LocationActivity.class);
                                     intent.putExtra("userinfor", userinfor);
                                     startActivity(intent);
-                                    // send email and id to your web server
                                 }
                             }
                         }).executeAsync();
@@ -146,12 +140,10 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                // App code
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
             }
         });
     }

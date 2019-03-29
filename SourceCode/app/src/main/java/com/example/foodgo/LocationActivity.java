@@ -36,10 +36,8 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
     private Location location;
     public static User userInfor = new User();
     private MyHelper database;
-    // Đối tượng tương tác với Google API
     private GoogleApiClient gac;
 
-    // Hiển thị vị trí
     private TextView tvLocation;
     private Button btnUseCurrentLocation;
     private  TextView welcome;
@@ -54,9 +52,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         btnUseCurrentLocation = findViewById(R.id.btnChooseLocation);
         tvLocation = (TextView) findViewById(R.id.txtChooseManually);
         welcome.setText("Hi " + userInfor.getFirstname() + ", Nice to meet you");
-        // Trước tiên chúng ta cần phải kiểm tra play services
         if (checkPlayServices()) {
-            // Building the GoogleApi client
             buildGoogleApiClient();
         }
 
@@ -89,14 +85,10 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
     }
 
 
-    /**
-     * Phương thức này dùng để hiển thị trên UI
-     */
     private UserAddress getLocation() {
         List<Address> addresses = null;
         UserAddress userAddress = new UserAddress();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Kiểm tra quyền hạn
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
         } else {
@@ -105,7 +97,6 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
             if (location != null) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                // Hiển thị
 
 
                 Geocoder geocoder;
@@ -114,13 +105,13 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
 
                 try {
 
-                    addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                    String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    String address = addresses.get(0).getAddressLine(0);
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();
                     String country = addresses.get(0).getCountryName();
                     String postalCode = addresses.get(0).getPostalCode();
-                    String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+                    String knownName = addresses.get(0).getFeatureName();
 
 
                     userAddress.setAddress(address);
@@ -149,9 +140,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
     }
 
 
-    /**
-     * Tạo đối tượng google api client
-     */
+
     protected synchronized void buildGoogleApiClient() {
         if (gac == null) {
             gac = new GoogleApiClient.Builder(this)
