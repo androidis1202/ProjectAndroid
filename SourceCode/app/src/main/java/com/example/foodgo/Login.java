@@ -1,7 +1,9 @@
 package com.example.foodgo;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Handler;
 import android.renderscript.Sampler;
@@ -45,7 +47,8 @@ public class Login extends AppCompatActivity {
     private CheckBox cbShowPassword;
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
-    private static User userinfor = new User();
+    public static User userinfor = new User();
+    private boolean session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class Login extends AppCompatActivity {
         txtTitle = findViewById(R.id.sign_in_title);
         txtPassword = findViewById(R.id.txtPassword_login);
         myHelper = new MyHelper(this);
+        session();
         btnSign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +76,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checkedAccount = myHelper.checkAccountLogin(txtEmail.getText().toString(), txtPassword.getText().toString());
                 if (checkedAccount == true) {
+                    save(getApplicationContext(), "session", "true");
                     final ProgressDialog progressDialog = new ProgressDialog(Login.this);
                     progressDialog.setIndeterminate(true);
                     progressDialog.setMessage("Authenticating...");
@@ -81,8 +86,8 @@ public class Login extends AppCompatActivity {
                         public void run() {
                             Intent intent = new Intent(Login.this, LocationActivity.class);
                             userinfor = myHelper.getDataUser(txtEmail.getText().toString());
-                            intent.putExtra("userinfor", userinfor);
                             startActivity(intent);
+                            finish();
                             progressDialog.dismiss();
                         }
                     }, 2000);
@@ -169,4 +174,30 @@ public class Login extends AppCompatActivity {
 //        }
 
     }
+
+    public void session() {
+        session = Boolean.valueOf(read(getApplicationContext(), "session", "false"));
+        if (session == false) {
+            return;
+        } else {
+            Intent intent = new Intent(Login.this, LocationActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "You are in login", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public static void save(Context ctx, String name, String value) {
+        SharedPreferences s = ctx.getSharedPreferences("shared", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = s.edit();
+
+        editor.putString(name, value);
+        editor.apply();
+    }
+
+    public static String read(Context context, String name, String defaultValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("shared", Context.MODE_PRIVATE);
+        return sharedPreferences.getString(name, defaultValue);
+    }
+
+
 }

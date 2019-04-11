@@ -52,17 +52,15 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         View headerView = navigationView.getHeaderView(0);
         TextView username = headerView.findViewById(R.id.txtNameOfUser);
         username.setText(userAddress.getEmail());
-        userAddress = myHelper.getDataAddress(LocationActivity.userInfor.getUsername());
+        userAddress = myHelper.getDataAddress(Login.userinfor.getUsername());
         User user = new User();
         user = myHelper.getDataUser(userAddress.getEmail());
         TextView firstname = headerView.findViewById(R.id.txtFirstOfUser);
-        firstname.setText("Hello " + LocationActivity.userInfor.getFirstname());
+        firstname.setText("Hello " + Login.userinfor.getFirstname());
         location = headerView.findViewById(R.id.locationOfUser);
-        if(userAddress.getCity() == null)
-        {
+        if (userAddress.getCity() == null) {
             location.setText("You need to open GPS");
-        }else
-        {
+        } else {
             location.setText("Your location : " + userAddress.getCity());
         }
         if (cartArrayList != null) {
@@ -113,7 +111,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_order: {
-                Intent intent = new Intent(MainMenu.this,Cart_layout.class);
+                Intent intent = new Intent(MainMenu.this, Cart_layout.class);
                 startActivity(intent);
                 break;
             }
@@ -137,6 +135,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
 
                 Intent it = new Intent(MainMenu.this, Login.class);
                 startActivity(it);
+                Login.save(getApplicationContext(), "session", "false");
                 break;
             }
             case R.id.nav_contact: {

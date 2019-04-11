@@ -34,7 +34,6 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         GoogleApiClient.OnConnectionFailedListener {
 
     private Location location;
-    public static User userInfor = new User();
     private MyHelper database;
     private GoogleApiClient gac;
 
@@ -47,11 +46,9 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         welcome = findViewById(R.id.textView2);
-        Intent intent = this.getIntent();
-        userInfor = (User) intent.getSerializableExtra("userinfor");
         btnUseCurrentLocation = findViewById(R.id.btnChooseLocation);
         tvLocation = (TextView) findViewById(R.id.txtChooseManually);
-        welcome.setText("Hi " + userInfor.getFirstname() + ", Nice to meet you");
+        welcome.setText("Hi " + Login.userinfor.getFirstname() + ", Nice to meet you");
         if (checkPlayServices()) {
             buildGoogleApiClient();
         }
@@ -73,7 +70,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationActivity.this, ChooseLocationActivity.class);
-                intent.putExtra("emailAddressChoose",userInfor.getUsername());
+                intent.putExtra("emailAddressChoose",Login.userinfor.getUsername());
                 startActivity(intent);
             }
         });
@@ -120,7 +117,7 @@ public class LocationActivity extends AppCompatActivity implements GoogleApiClie
                     userAddress.setKnownName(knownName);
                     userAddress.setState(state);
                     userAddress.setPostalCode(postalCode);
-                    userAddress.setEmail(userInfor.getUsername());
+                    userAddress.setEmail(Login.userinfor.getUsername());
                     database = new MyHelper(this);
                     database.insertDataAddress(userAddress);
 

@@ -64,12 +64,12 @@ public class DetailFood extends AppCompatActivity {
                     }
                     if (checkExistCard == 0) {
                         float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
-                        MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), LocationActivity.userInfor.getUsername()));
+                        MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), Login.userinfor.getUsername()));
                     }
                 } else {
                     //int number = Integer.parseInt(spinner.getSelectedItem().toString());
                     float sum = Integer.parseInt(spinner.getSelectedItem().toString()) * drink.getPrice();
-                    MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), LocationActivity.userInfor.getUsername()));
+                    MainMenu.cartArrayList.add(new Cart(drink.getId(), drink.getName(), sum, drink.getImage(), Integer.parseInt(spinner.getSelectedItem().toString()), Login.userinfor.getUsername()));
                 }
                 Intent intent = new Intent(getApplicationContext(), Cart_layout.class);
                 startActivity(intent);
